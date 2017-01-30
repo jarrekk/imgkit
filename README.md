@@ -2,13 +2,16 @@
 
 [![Build Status](https://travis-ci.org/travis-ci/travis-web.svg?branch=master)](https://travis-ci.org/travis-ci/travis-web)
 
-## Installation
+Python 2 and 3 wrapper for wkhtmltoimage utility to convert HTML to IMG using Webkit.
 
+This is adapted version of [python PDFKit](https://github.com/JazzCore/python-pdfkit), thanks to them!
+
+## Installation
 
 1. Install imgkit:
 
   ``` python
-  $ pip install imgkit
+  pip install imgkit
   ```
 
 2. Install wkhtmltopdf:
