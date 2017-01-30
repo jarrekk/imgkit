@@ -9,4 +9,4 @@ python:
 before_script: "sh ./travis/init.sh"
 script: nosetests -w tests
 notifications:
-  email: me@jack003.c
+  email: me@jack003.com
