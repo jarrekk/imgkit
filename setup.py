@@ -46,7 +46,8 @@ setup(
     cmdclass={'test': PyTest},
     packages=['imgkit'],
     author=imgkit.__author__,
-    author_email='me@jack003.com',
+    author_email=imgkit.__contact__,
+    url=imgkit.__homepage__,
     classifiers=[
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
