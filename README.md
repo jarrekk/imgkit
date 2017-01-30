@@ -29,7 +29,7 @@ Python 2 and 3 wrapper for wkhtmltoimage utility to convert HTML to IMG using We
     brew install wkhtmltopdf
     ```
 
-  * Windows and other options: check [wkhtmltopdf homepage](http://wkhtmltopdf.org/) for binary installers.
+  * Windows and other options: check [wkhtmltopdf homepage](http://wkhtmltopdf.org/) for binary installers or [wiki page](https://github.com/pdfkit/pdfkit/wiki/Installing-WKHTMLTOPDF).
 
 ## Usage
 
