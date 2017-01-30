@@ -1,0 +1,14 @@
+# Ide
+.idea
+*.pyc
+
+# Build
+.cache
+.eggs
+build
+dist
+imgkit.egg-info
+
+# Tests
+.tox
+.python-version
