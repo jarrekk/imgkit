@@ -5,15 +5,17 @@
 
 Python 2 and 3 wrapper for wkhtmltoimage utility to convert HTML to IMG using Webkit.
 
-This is adapted version of [python PDFKit](https://github.com/JazzCore/python-pdfkit), thanks to them!
+## Credit
+
+This is library edited from [python PDFKit](https://github.com/JazzCore/python-pdfkit)
 
 ## Installation
 
 1. Install imgkit:
 
-  ``` python
-  pip install imgkit
-  ```
+    ``` bash
+    sudo apt-get install wkhtmltopdf
+    ```
 
 2. Install wkhtmltopdf:
 
@@ -22,6 +24,7 @@ This is adapted version of [python PDFKit](https://github.com/JazzCore/python-pd
     ``` bash
     sudo apt-get install wkhtmltopdf
     ```
+
     **Warning!** Version in debian/ubuntu repos have reduced functionality (because it compiled without the wkhtmltopdf QT patches), such as adding outlines, headers, footers, TOC etc. To use this options you should install static binary from [wkhtmltopdf](http://wkhtmltopdf.org/) site or you can use this [script](https://github.com/JiaKunUp/imgkit/blob/master/travis/init.sh).
 
   * MacOSX
@@ -129,14 +132,14 @@ You can also pass any options through meta tags in your HTML:
 
 ``` python
 body = """
-    <html>
-      <head>
-        <meta name="imgkit-format" content="jpg"/>
-        <meta name="imgkit-orientation" content="Landscape"/>
-      </head>
-      Hello World!
-      </html>
-    """
+<html>
+  <head>
+    <meta name="imgkit-format" content="jpg"/>
+    <meta name="imgkit-orientation" content="Landscape"/>
+  </head>
+  Hello World!
+  </html>
+"""
 
 imgkit.from_string(body, 'out.jpg')
 ```

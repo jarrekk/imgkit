@@ -23,12 +23,16 @@ class PyTest(test):
 
 
 def long_description():
-    """Pre-process the README so that PyPi can render it properly."""
-    with codecs.open('README.md', encoding='utf8') as f:
-        rst = f.read()
-    code_block = '(:\n\n)?\.\. code-block::.*'
-    rst = re.sub(code_block, '::', rst)
-    return rst + '\n\n' + open('HISTORY.md').read()
+    try:
+        import pypandoc
+        long_desc = pypandoc.convert_file('README.md', 'rst')
+        long_desc += '\n' + pypandoc.convert_file('HISTORY.md', 'rst')
+        long_desc += '\n' + pypandoc.convert_file('AUTHORS.md', 'rst')
+    except(IOError, ImportError):
+        long_desc = open('README.md').read()
+        long_desc += '\n' + open('HISTORY.md').read()
+        long_desc += '\n' + open('AUTHORS.md').read()
+    return long_desc
 
 
 setup(
