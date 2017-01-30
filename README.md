@@ -1,6 +1,7 @@
 # IMGKit: Python library of HTML to IMG wrapper
 
 [![Build Status](https://travis-ci.org/travis-ci/travis-web.svg?branch=master)](https://travis-ci.org/travis-ci/travis-web)
+[![PyPI version](https://badge.fury.io/py/imgkit.svg)](https://badge.fury.io/py/imgkit)
 
 Python 2 and 3 wrapper for wkhtmltoimage utility to convert HTML to IMG using Webkit.
 

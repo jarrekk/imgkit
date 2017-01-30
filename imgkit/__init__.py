@@ -4,7 +4,7 @@ Wkhtmltopdf python wrapper to convert html to image using the webkit rendering e
 """
 
 __author__ = 'JiaKunUp'
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 __license__ = 'MIT'
 
 from .imgkit import IMGKit
