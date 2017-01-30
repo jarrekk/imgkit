@@ -5,7 +5,7 @@ python:
   - 3.3
   - 3.4
   - 3.5
-before_script: "./travis/init.sh"
+before_script: "sh ./travis/init.sh"
 script: nosetests -w tests
 notifications:
   email: me@jack003.c
