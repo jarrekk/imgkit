@@ -64,7 +64,7 @@ If you wish to further process generated IMG, you can read it to a variable:
 img = imgkit.from_url('http://google.com', False)
 ```
 
-You can find all wkhtmltoimage options by type `wkhtmltoimage` command. You can drop '--' in option name. If option without value, use *None, False* or *''* for dict value:. For repeatable options (incl. allow, cookie, custom-header, post, postfile, run-script, replace) you may use a list or a tuple. With option that need multiple values (e.g. --custom-header Authorization secret) we may use a 2-tuple (see example below).
+You can find all wkhtmltoimage options by type `wkhtmltoimage` command or visit this [Manual](http://madalgo.au.dk/~jakobt/wkhtmltoxdoc/wkhtmltoimage_0.10.0_rc2-doc.html). You can drop '--' in option name. If option without value, use *None, False* or *''* for dict value:. For repeatable options (incl. allow, cookie, custom-header, post, postfile, run-script, replace) you may use a list or a tuple. With option that need multiple values (e.g. --custom-header Authorization secret) we may use a 2-tuple (see example below).
 
 ``` python
 options = {
