@@ -68,7 +68,7 @@ You can find all wkhtmltoimage options by type `wkhtmltoimage` command. You can 
 
 ``` python
 options = {
-    'format': 'jpg',
+    'format': 'png',
     'crop-h': '3',
     'crop-w': '3',
     'crop-x': '3',
@@ -84,7 +84,7 @@ options = {
     'no-outline': None
 }
 
-imgkit.from_url('http://google.com', 'out.jpg', options=options)
+imgkit.from_url('http://google.com', 'out.png', options=options)
 ```
 
 By default, IMGKit will show all `wkhtmltoimage` output. If you don't want it, you need to pass `quiet` option:
@@ -130,14 +130,14 @@ You can also pass any options through meta tags in your HTML:
 body = """
 <html>
   <head>
-    <meta name="imgkit-format" content="jpg"/>
+    <meta name="imgkit-format" content="png"/>
     <meta name="imgkit-orientation" content="Landscape"/>
   </head>
   Hello World!
   </html>
 """
 
-imgkit.from_string(body, 'out.jpg')
+imgkit.from_string(body, 'out.png')
 ```
 
 ## Configuration
