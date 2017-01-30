@@ -236,3 +236,16 @@ class IMGKit(object):
 
         if not path:
             return stdout
+        else:
+            try:
+                with codecs.open(path) as f:
+                    text = f.read(4)
+                    if text == '':
+                        raise IOError('Command failed: %s\n'
+                                      'Check whhtmltopdf output without \'quiet\' '
+                                      'option' % ' '.join(args))
+                    return True
+            except IOError as e:
+                raise IOError('Command failed: %s\n'
+                              'Check whhtmltopdf output without \'quiet\' option\n'
+                              '%s ' % (' '.join(args)), e)
