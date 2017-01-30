@@ -9,8 +9,8 @@ Python 2 and 3 wrapper for wkhtmltoimage utility to convert HTML to IMG using We
 
 1. Install imgkit:
 
-    ``` bash
-    sudo apt-get install wkhtmltopdf
+    ``` python
+    pip install imgkit
     ```
 
 2. Install wkhtmltopdf:
