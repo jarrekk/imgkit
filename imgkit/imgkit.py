@@ -221,7 +221,7 @@ class IMGKit(object):
             raise IOError('%s\n'
                           'You will need to run wkhtmltoimage within a "virtual" X server.\n'
                           'Go to the link below for more information\n'
-                          'https://github.com/JiaKunUp/imgkit' % stderr)
+                          'http://wkhtmltopdf.org' % stderr)
 
         if 'Error' in stderr:
             raise IOError('wkhtmltoimage reported an error:\n' + stderr)
@@ -242,10 +242,10 @@ class IMGKit(object):
                     text = f.read(4)
                     if text == '':
                         raise IOError('Command failed: %s\n'
-                                      'Check whhtmltopdf output without \'quiet\' '
+                                      'Check whhtmltoimage output without \'quiet\' '
                                       'option' % ' '.join(args))
                     return True
             except IOError as e:
                 raise IOError('Command failed: %s\n'
-                              'Check whhtmltopdf output without \'quiet\' option\n'
+                              'Check whhtmltoimage output without \'quiet\' option\n'
                               '%s ' % (' '.join(args)), e)

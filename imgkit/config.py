@@ -24,4 +24,4 @@ class Config(object):
             raise IOError('No wkhtmltoimage executable found: "%s"\n'
                           'If this file exists please check that this process can '
                           'read it. Otherwise please install wkhtmltopdf - '
-                          'https://github.com/JiaKunUp/imgkit' % self.wkhtmltoimage)
+                          'http://wkhtmltopdf.org' % self.wkhtmltoimage)
