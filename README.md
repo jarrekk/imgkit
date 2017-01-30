@@ -5,10 +5,6 @@
 
 Python 2 and 3 wrapper for wkhtmltoimage utility to convert HTML to IMG using Webkit.
 
-## Credit
-
-This is library edited from [python PDFKit](https://github.com/JazzCore/python-pdfkit)
-
 ## Installation
 
 1. Install imgkit:
@@ -168,3 +164,7 @@ imgkit.from_string(html_string, output_file, config=config)
 * `IOError: 'Command Failed'`:
 
   This error means that IMGKit was unable to process an input. You can try to directly run a command from error message and see what error caused failure (on some wkhtmltoimage versions this can be cause by segmentation faults)
+
+## Credit
+
+This is library edited from [python PDFKit](https://github.com/JazzCore/python-pdfkit)
