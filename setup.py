@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-import codecs
 from distutils.core import setup
 from setuptools.command.test import test
-import re
 import os
 import sys
 import imgkit
@@ -39,7 +37,9 @@ setup(
     name='imgkit',
     version=imgkit.__version__,
     description=imgkit.__doc__.strip(),
-    long_description=long_description(),
+    # push to pypi should use this
+    long_description=imgkit.__doc__.strip(),
+    # long_description=long_description(),
     download_url='https://github.com/JiaKunUp/imgkit',
     license=imgkit.__license__,
     tests_require=['pytest'],
