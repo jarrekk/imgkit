@@ -239,7 +239,7 @@ class IMGKit(object):
         else:
             try:
                 with codecs.open(path) as f:
-                    text = f.read(4)
+                    text = f.read(4).encode()
                     if text == '':
                         raise IOError('Command failed: %s\n'
                                       'Check whhtmltoimage output without \'quiet\' '
