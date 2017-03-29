@@ -1,6 +1,6 @@
 ## IMGKit author
 
-* **JiaKunUp** <https://github.com/JiaKunUp>
+* **jarrekk** <https://github.com/jarrekk>
 
 ### Contributors
 
