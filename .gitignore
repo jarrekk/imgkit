@@ -13,3 +13,5 @@ imgkit.egg-info
 # Tests
 .tox
 .python-version
+
+.DS_Store
