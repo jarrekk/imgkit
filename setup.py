@@ -38,8 +38,8 @@ setup(
     version=imgkit.__version__,
     description=imgkit.__doc__.strip(),
     # push to pypi should use this
-    # long_description=imgkit.__doc__.strip(),
-    long_description=long_description(),
+    long_description=imgkit.__doc__.strip(),
+    # long_description=long_description(),
     download_url='https://github.com/jarrekk/imgkit',
     license=imgkit.__license__,
     tests_require=['pytest'],
