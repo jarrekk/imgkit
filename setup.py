@@ -26,7 +26,8 @@ def long_description():
         long_desc = pypandoc.convert_file('README.md', 'rst')
         long_desc += '\n' + pypandoc.convert_file('HISTORY.md', 'rst')
         long_desc += '\n' + pypandoc.convert_file('AUTHORS.md', 'rst')
-    except(IOError, ImportError):
+    except Exception as e:
+        print e
         long_desc = imgkit.__doc__.strip()
     return long_desc
 

@@ -9,6 +9,7 @@ before_script: sh ./travis/init.sh
 script: nosetests -w tests
 notifications:
   email: me@jarrekk.com
+before_deploy: "pip install pypandoc"
 deploy:
   provider: pypi
   user: jack614
