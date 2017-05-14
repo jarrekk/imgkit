@@ -20,12 +20,6 @@ class PyTest(test):
         sys.exit(err_no)
 
 
-def _read_file(fname):
-    """Read a file properly by constructing absolute path to it.
-    """
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
-
-
 def long_description():
     try:
         import pypandoc
@@ -33,9 +27,7 @@ def long_description():
         long_desc += '\n' + pypandoc.convert_file('HISTORY.md', 'rst')
         long_desc += '\n' + pypandoc.convert_file('AUTHORS.md', 'rst')
     except(IOError, ImportError):
-        long_desc = _read_file('README.md')
-        long_desc += '\n' + _read_file('HISTORY.md')
-        long_desc += '\n' + _read_file('AUTHORS.md')
+        long_desc = imgkit.__doc__.strip()
     return long_desc
 
 
@@ -43,8 +35,6 @@ setup(
     name='imgkit',
     version=imgkit.__version__,
     description=imgkit.__doc__.strip(),
-    # push to pypi should use this
-    # long_description=imgkit.__doc__.strip(),
     long_description=long_description(),
     download_url='https://github.com/jarrekk/imgkit',
     license=imgkit.__license__,
