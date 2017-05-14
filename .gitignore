@@ -13,3 +13,8 @@ imgkit.egg-info
 # Tests
 .tox
 .python-version
+
+# Virtualenv
+.env
+env
+venv

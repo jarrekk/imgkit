@@ -20,6 +20,12 @@ class PyTest(test):
         sys.exit(err_no)
 
 
+def _read_file(fname):
+    """Read a file properly by constructing absolute path to it.
+    """
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
+
 def long_description():
     try:
         import pypandoc
@@ -27,9 +33,9 @@ def long_description():
         long_desc += '\n' + pypandoc.convert_file('HISTORY.md', 'rst')
         long_desc += '\n' + pypandoc.convert_file('AUTHORS.md', 'rst')
     except(IOError, ImportError):
-        long_desc = open('README.md').read()
-        long_desc += '\n' + open('HISTORY.md').read()
-        long_desc += '\n' + open('AUTHORS.md').read()
+        long_desc = _read_file('README.md')
+        long_desc += '\n' + _read_file('HISTORY.md')
+        long_desc += '\n' + _read_file('AUTHORS.md')
     return long_desc
 
 
