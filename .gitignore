@@ -18,3 +18,5 @@ imgkit.egg-info
 .env
 env
 venv
+
+.DS_Store
