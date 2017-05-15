@@ -1,1 +1,1 @@
-include README.md HISTORY.md AUTHORS.md LICENSE
+include README.md AUTHORS.md LICENSE

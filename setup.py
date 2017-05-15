@@ -24,7 +24,6 @@ def long_description():
     try:
         import pypandoc
         long_desc = pypandoc.convert_file('README.md', 'rst')
-        long_desc += '\n' + pypandoc.convert_file('HISTORY.md', 'rst')
         long_desc += '\n' + pypandoc.convert_file('AUTHORS.md', 'rst')
     except Exception as e:
         print e
@@ -48,8 +47,9 @@ setup(
     classifiers=[
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
         'Topic :: Text Processing',
         'Topic :: Text Processing :: General',
         'Topic :: Text Processing :: Markup',
