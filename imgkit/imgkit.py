@@ -37,6 +37,8 @@ class IMGKit(object):
         except AttributeError:
             self.wkhtmltoimage = self.config.wkhtmltoimage
 
+        self.xvfb = self.config.xvfb
+
         self.options = {}
         if self.source.isString():
             self.options.update(self._find_options_in_meta(url_or_file))
@@ -72,6 +74,8 @@ class IMGKit(object):
         """
         if self.css:
             self._prepend_css(self.css)
+
+        yield self.xvfb
 
         yield self.wkhtmltoimage
 

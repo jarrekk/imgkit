@@ -9,6 +9,9 @@ class Config(object):
 
         self.wkhtmltoimage = wkhtmltoimage
 
+        self.xvfb = subprocess.Popen(['which', 'xvfb-run'],
+                                                      stdout=subprocess.PIPE).communicate()[0].strip()
+
         if not self.wkhtmltoimage:
             if sys.platform == 'win32':
                 self.wkhtmltoimage = subprocess.Popen(['where', 'wkhtmltoimage'],
