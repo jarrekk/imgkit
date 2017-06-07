@@ -145,9 +145,9 @@ class TestIMGKitCommandGeneration(unittest.TestCase):
         self.assertEqual(r.command()[-2:], [path, '-'])
 
     def test_output_path(self):
-        out = '/test/test2/out.pdf'
+        out = '/test/test2/out.jpg'
         r = imgkit.IMGKit('html', 'string')
-        self.assertEqual(r.command(out)[-1:], ['/test/test2/out.pdf'])
+        self.assertEqual(r.command(out)[-1:], ['/test/test2/out.jpg'])
 
     def test_imgkit_meta_tags(self):
         body = """
@@ -291,24 +291,24 @@ class TestIMGKitCommandGeneration(unittest.TestCase):
 
 
 class TestIMGKitGeneration(unittest.TestCase):
-    """Test to_pdf() method"""
+    """Test to_img() method"""
 
     def setUp(self):
         pass
 
     def tearDown(self):
-        if os.path.exists('out.pdf'):
-            os.remove('out.pdf')
+        if os.path.exists('out.jpg'):
+            os.remove('out.jpg')
 
     def test_img_generation(self):
         r = imgkit.IMGKit('html', 'string', options={'format': 'jpg'})
-        pdf = r.to_img('out.jpg')
-        self.assertTrue(pdf)
+        pic = r.to_img('out.jpg')
+        self.assertTrue(pic)
 
     def test_img_generation_xvfb(self):
         r = imgkit.IMGKit('html', 'string', options={'format': 'jpg', 'xvfb': ''})
-        pdf = r.to_img('out.jpg')
-        self.assertTrue(pdf)
+        pic = r.to_img('out.jpg')
+        self.assertTrue(pic)
 
     def test_raise_error_with_invalid_url(self):
         r = imgkit.IMGKit('wrongurl', 'url')
