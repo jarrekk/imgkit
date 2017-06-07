@@ -70,16 +70,19 @@ class IMGKit(object):
     def _command(self, path=None):
         """
         Generator of all command parts
+        :type options: object
         :return:
         """
+        options = self._gegetate_args(self.options)
         if self.css:
             self._prepend_css(self.css)
 
-        yield self.xvfb
+        if '--xvfb' in options:
+            yield self.xvfb
 
         yield self.wkhtmltoimage
 
-        for argpart in self._gegetate_args(self.options):
+        for argpart in options:
             if argpart:
                 yield argpart
 
@@ -231,7 +234,10 @@ class IMGKit(object):
             raise IOError('wkhtmltoimage reported an error:\n' + stderr)
 
         if exit_code != 0:
-            raise IOError("wkhtmltoimage exited with non-zero code {0}. error:\n{1}".format(exit_code, stderr))
+            xvfb_error = ''
+            if 'QXcbConnection' in stderr:
+                xvfb_error = 'You need to install xvfb(sudo apt-get install xvfb, yum install xorg-x11-server-Xvfb, etc), then add option: {"xvfb": ""}.'
+            raise IOError("wkhtmltoimage exited with non-zero code {0}. error:\n{1}\n\n{2}".format(exit_code, stderr, xvfb_error))
 
         # Since wkhtmltoimage sends its output to stderr we will capture it
         # and properly send to stdout
