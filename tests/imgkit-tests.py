@@ -305,6 +305,11 @@ class TestIMGKitGeneration(unittest.TestCase):
         pdf = r.to_img('out.jpg')
         self.assertTrue(pdf)
 
+    def test_img_generation_xvfb(self):
+        r = imgkit.IMGKit('html', 'string', options={'format': 'jpg', 'xvfb': ''})
+        pdf = r.to_img('out.jpg')
+        self.assertTrue(pdf)
+
     def test_raise_error_with_invalid_url(self):
         r = imgkit.IMGKit('wrongurl', 'url')
         with self.assertRaises(IOError):
