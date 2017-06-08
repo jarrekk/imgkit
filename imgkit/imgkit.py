@@ -74,6 +74,7 @@ class IMGKit(object):
         :return:
         """
         options = self._gegetate_args(self.options)
+        print 'options', options
         if self.css:
             self._prepend_css(self.css)
 
