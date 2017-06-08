@@ -252,7 +252,6 @@ class IMGKit(object):
         else:
             try:
                 with codecs.open(path) as f:
-                    text = f.read(4)
                     if sys.version.startswith('3.4') or sys.version.startswith('3.5'):
                         text = f.read(4).encode()
                     else:
