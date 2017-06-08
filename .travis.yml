@@ -7,7 +7,7 @@ python:
 - 3.5
 - 3.6
 before_script: sh ./travis/init.sh
-script: cd tests && nosetests imgkit-tests.py cd -
+script: cd tests && nosetests imgkit-tests.py && cd -
 notifications:
   email: me@jarrekk.com
 before_deploy: sh ./travis/pandoc.sh
