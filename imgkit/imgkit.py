@@ -253,10 +253,10 @@ class IMGKit(object):
             try:
                 with codecs.open(path) as f:
                     text = f.read(4)
-                    # if sys.version.startswith('2'):
-                    #     text = f.read(4)
-                    # else:
-                    #     text = f.read(4).encode()
+                    if sys.version.startswith('3.4') or sys.version.startswith('3.5'):
+                        text = f.read(4).encode()
+                    else:
+                        text = f.read(4)
                     if text == '':
                         raise IOError('Command failed: %s\n'
                                       'Check whhtmltoimage output without \'quiet\' '
