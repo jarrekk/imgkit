@@ -74,11 +74,13 @@ class IMGKit(object):
         :return:
         """
         options = self._gegetate_args(self.options)
-        print 'options', options
+        options = [x for x in options]
+        # print 'options', options
         if self.css:
             self._prepend_css(self.css)
 
         if '--xvfb' in options:
+            options.remove('--xvfb')
             yield self.xvfb
 
         yield self.wkhtmltoimage
