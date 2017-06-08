@@ -392,7 +392,7 @@ class TestIMGKitGeneration(unittest.TestCase):
         with open('fixtures/example.html', 'r') as f:
             r = imgkit.IMGKit(f, 'file')
             output = r.to_img()
-        self.assertEqual(output[:4], '\xff\xd8\xff\xe0')  # TODO img
+        self.assertEqual(output[:4], b'\xff\xd8\xff\xe0')  # TODO img
 
     def test_raise_error_with_wrong_css_path(self):
         css = 'fixtures/wrongpath.css'
