@@ -5,6 +5,7 @@ python:
 - 3.3
 - 3.4
 - 3.5
+- 3.6
 before_script: sh ./travis/init.sh
 script: cd tests && nosetests imgkit-tests.py
 notifications:
