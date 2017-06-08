@@ -253,7 +253,7 @@ class IMGKit(object):
             try:
                 with codecs.open(path) as f:
                     if sys.version.startswith('3.4') or sys.version.startswith('3.5'):
-                        text = f.read(4).decode()
+                        text = f.read(4).decode('utf16')
                     else:
                         text = f.read(4)
                     if text == '':
