@@ -27,7 +27,7 @@ class Config(object):
                                              stdout=subprocess.PIPE).communicate()[0].strip()
 
         try:
-            with open(self.wkhtmltoimage) as f:
+            with open(self.wkhtmltoimage):
                 pass
         except IOError:
             raise IOError('No wkhtmltoimage executable found: "{0}"\n'
