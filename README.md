@@ -1,8 +1,8 @@
 # IMGKit: Python library of HTML to IMG wrapper
 
 [![Build Status](https://travis-ci.org/jarrekk/imgkit.svg?branch=master)](https://travis-ci.org/jarrekk/imgkit)
-[![PyPI version](https://badge.fury.io/py/imgkit.svg)](https://badge.fury.io/py/imgkit)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/aa1f67f04ff24bb080b7f8c8a9b7b8b1)](https://www.codacy.com/app/jarrekk/imgkit?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jarrekk/imgkit&amp;utm_campaign=Badge_Grade)
+[![PyPI version](https://badge.fury.io/py/imgkit.svg)](https://badge.fury.io/py/imgkit)
 
 ```
   _____   __  __    _____   _  __  _   _
