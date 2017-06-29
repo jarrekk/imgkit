@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/jarrekk/imgkit.svg?branch=master)](https://travis-ci.org/jarrekk/imgkit)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/aa1f67f04ff24bb080b7f8c8a9b7b8b1)](https://www.codacy.com/app/jarrekk/imgkit?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jarrekk/imgkit&amp;utm_campaign=Badge_Grade)
 [![PyPI version](https://badge.fury.io/py/imgkit.svg)](https://badge.fury.io/py/imgkit)
+[![Code Coverage](https://codecov.io/github/jarrekk/imgkit/branch/master/graph/badge.svg)](https://codecov.io/github/jarrekk/imgkit/)
 
 ```
   _____   __  __    _____   _  __  _   _
