@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/jarrekk/imgkit.svg?branch=master)](https://travis-ci.org/jarrekk/imgkit)
 [![PyPI version](https://badge.fury.io/py/imgkit.svg)](https://badge.fury.io/py/imgkit)
 [![PyPI downloads](https://vps.jarrekk.com:8443/api/v1.0/pypi/imgkit.svg)](https://vps.jarrekk.com:8443/api/v1.0/pypi/imgkit.svg)
+[![Code Coverage](https://codecov.io/github/jarrekk/imgkit/branch/master/graph/badge.svg)](https://codecov.io/github/jarrekk/imgkit/)
 
 ```
   _____   __  __    _____   _  __  _   _
