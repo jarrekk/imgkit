@@ -6,7 +6,9 @@ python:
 - 3.4
 - 3.5
 - 3.6
-before_script: sh ./travis/init.sh
+before_script:
+  - sh ./travis/init.sh
+  - pip install codecov
 script:
   - cd tests && nosetests --with-coverage imgkit-tests.py && cd -
   - codecov
