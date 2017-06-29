@@ -74,10 +74,13 @@ class IMGKit(object):
         :return:
         """
         options = self._gegetate_args(self.options)
+        options = [x for x in options]
+        # print 'options', options
         if self.css:
             self._prepend_css(self.css)
 
         if '--xvfb' in options:
+            options.remove('--xvfb')
             yield self.xvfb
 
         yield self.wkhtmltoimage
@@ -248,11 +251,8 @@ class IMGKit(object):
             return stdout
         else:
             try:
-                with codecs.open(path) as f:
-                    if sys.version.startswith('2'):
-                        text = f.read(4)
-                    else:
-                        text = f.read(4).encode()
+                with codecs.open(path, mode='rb') as f:
+                    text = f.read(4)
                     if text == '':
                         raise IOError('Command failed: %s\n'
                                       'Check whhtmltoimage output without \'quiet\' '
