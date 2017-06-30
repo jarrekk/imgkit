@@ -10,7 +10,7 @@ before_script:
   - sh ./travis/init.sh
   - pip install codecov
 script:
-  - cd tests && nosetests --with-coverage imgkit-tests.py && cd -
+  - nosetests --with-coverage --cover-package=imgkit test
   - codecov
 notifications:
   email: me@jarrekk.com

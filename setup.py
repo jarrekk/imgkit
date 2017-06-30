@@ -9,13 +9,13 @@ import imgkit
 class PyTest(test):
     def finalize_options(self):
         test.finalize_options(self)
-        self.test_args = ['imgkit-tests.py']
+        self.test_args = ['imgkit_test.py']
         self.test_suite = True
 
     def run_tests(self):
         # import here, cause outside the eggs aren't loaded
         import pytest
-        os.chdir('tests/')
+        os.chdir('test/')
         err_no = pytest.main(self.test_args)
         sys.exit(err_no)
 
