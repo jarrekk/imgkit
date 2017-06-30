@@ -412,5 +412,21 @@ class TestIMGKitGeneration(unittest.TestCase):
                                  '--bad-option\r?\n')
 
 
+class TestIMGKitAPI(unittest.TestCase):
+    """Test API"""
+
+    def test_from_string(self):
+        pic = imgkit.from_string('hello imgkit!', 'out.jpg')
+        self.assertTrue(pic)
+
+    def test_from_url(self):
+        pic = imgkit.from_url('https://github.com', 'out.jpg')
+        self.assertTrue(pic)
+
+    def test_from_file(self):
+        pic = imgkit.from_file('fixtures/example.html', 'out.jpg')
+        self.assertTrue(pic)
+
+
 if __name__ == "__main__":
     unittest.main()
