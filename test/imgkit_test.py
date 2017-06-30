@@ -6,8 +6,8 @@ import codecs
 import unittest
 
 # Prepend ../ to PYTHONPATH so that we can import IMGKIT form there.
-TESTS_ROOT = os.path.abspath(os.path.dirname(__file__))
-sys.path.insert(0, os.path.realpath(os.path.join(TESTS_ROOT, '..')))
+TEST_ROOT = os.path.abspath(os.path.dirname(__file__))
+sys.path.insert(0, os.path.realpath(os.path.join(TEST_ROOT, '..')))
 
 import imgkit
 
@@ -24,19 +24,19 @@ class TestIMGKitInitialization(unittest.TestCase):
         self.assertTrue(r.source.isUrl())
 
     def test_file_source(self):
-        r = imgkit.IMGKit('fixtures/example.html', 'file')
+        r = imgkit.IMGKit(os.path.join(TEST_ROOT,  'fixtures/example.html'), 'file')
         self.assertTrue(r.source.isFile())
 
     def test_file_object_source(self):
-        with open('fixtures/example.html') as fl:
+        with open(os.path.join(TEST_ROOT,  'fixtures/example.html')) as fl:
             r = imgkit.IMGKit(fl, 'file')
             self.assertTrue(r.source.isFileObj())
 
     def test_file_source_with_path(self):
         r = imgkit.IMGKit('test', 'string')
-        with io.open('fixtures/example.css') as f:
+        with io.open(os.path.join(TEST_ROOT,  'fixtures/example.css')) as f:
             self.assertTrue(r.source.isFile(path=f))
-        with codecs.open('fixtures/example.css', encoding='UTF-8') as f:
+        with codecs.open(os.path.join(TEST_ROOT,  'fixtures/example.css'), encoding='UTF-8') as f:
             self.assertTrue(r.source.isFile(path=f))
 
     def test_options_parsing(self):
@@ -123,13 +123,13 @@ class TestIMGKitCommandGeneration(unittest.TestCase):
 
     def test_lists_of_input_args(self):
         urls = ['http://ya.ru', 'http://google.com']
-        paths = ['fixtures/example.html', 'fixtures/example.html']
+        paths = [os.path.join(TEST_ROOT,  'fixtures/example.html'), os.path.join(TEST_ROOT,  'fixtures/example.html')]
         r = imgkit.IMGKit(urls, 'url')
         r2 = imgkit.IMGKit(paths, 'file')
         cmd = r.command()
         cmd2 = r2.command()
         self.assertEqual(cmd[-3:], ['http://ya.ru', 'http://google.com', '-'])
-        self.assertEqual(cmd2[-3:], ['fixtures/example.html', 'fixtures/example.html', '-'])
+        self.assertEqual(cmd2[-3:], [os.path.join(TEST_ROOT,  'fixtures/example.html'), os.path.join(TEST_ROOT,  'fixtures/example.html'), '-'])
 
     def test_read_source_from_stdin(self):
         r = imgkit.IMGKit('html', 'string')
@@ -140,7 +140,7 @@ class TestIMGKitCommandGeneration(unittest.TestCase):
         self.assertEqual(r.command()[-2:], ['http://ya.ru', '-'])
 
     def test_file_path_in_command(self):
-        path = 'fixtures/example.html'
+        path = os.path.join(TEST_ROOT,  'fixtures/example.html')
         r = imgkit.IMGKit(path, 'file')
         self.assertEqual(r.command()[-2:], [path, '-'])
 
@@ -325,27 +325,27 @@ class TestIMGKitGeneration(unittest.TestCase):
     def test_stylesheet_adding_to_the_head(self):
         # TODO rewrite this part of pdfkit.py
         r = imgkit.IMGKit('<html><head></head><body>Hai!</body></html>', 'string',
-                          css='fixtures/example.css')
+                          css=os.path.join(TEST_ROOT,  'fixtures/example.css'))
 
-        with open('fixtures/example.css') as f:
+        with open(os.path.join(TEST_ROOT,  'fixtures/example.css')) as f:
             css = f.read()
 
-        r._prepend_css('fixtures/example.css')
+        r._prepend_css(os.path.join(TEST_ROOT,  'fixtures/example.css'))
         self.assertIn('<style>%s</style>' % css, r.source.to_s())
 
     def test_stylesheet_adding_without_head_tag(self):
         r = imgkit.IMGKit('<html><body>Hai!</body></html>', 'string',
-                          options={'quiet': None}, css='fixtures/example.css')
+                          options={'quiet': None}, css=os.path.join(TEST_ROOT,  'fixtures/example.css'))
 
-        with open('fixtures/example.css') as f:
+        with open(os.path.join(TEST_ROOT,  'fixtures/example.css')) as f:
             css = f.read()
 
-        r._prepend_css('fixtures/example.css')
+        r._prepend_css(os.path.join(TEST_ROOT,  'fixtures/example.css'))
         self.assertIn('<style>%s</style><html>' % css, r.source.to_s())
 
     def test_multiple_stylesheets_adding_to_the_head(self):
         # TODO rewrite this part of pdfkit.py
-        css_files = ['fixtures/example.css', 'fixtures/example2.css']
+        css_files = [os.path.join(TEST_ROOT,  'fixtures/example.css'), os.path.join(TEST_ROOT,  'fixtures/example2.css')]
         r = imgkit.IMGKit('<html><head></head><body>Hai!</body></html>', 'string',
                           css=css_files)
 
@@ -358,7 +358,7 @@ class TestIMGKitGeneration(unittest.TestCase):
         self.assertIn('<style>%s</style>' % "\n".join(css), r.source.to_s())
 
     def test_multiple_stylesheet_adding_without_head_tag(self):
-        css_files = ['fixtures/example.css', 'fixtures/example2.css']
+        css_files = [os.path.join(TEST_ROOT,  'fixtures/example.css'), os.path.join(TEST_ROOT,  'fixtures/example2.css')]
         r = imgkit.IMGKit('<html><body>Hai!</body></html>', 'string',
                           options={'quiet': None}, css=css_files)
 
@@ -371,14 +371,14 @@ class TestIMGKitGeneration(unittest.TestCase):
         self.assertIn('<style>%s</style><html>' % "\n".join(css), r.source.to_s())
 
     def test_stylesheet_throw_error_when_url(self):
-        r = imgkit.IMGKit('http://ya.ru', 'url', css='fixtures/example.css')
+        r = imgkit.IMGKit('http://ya.ru', 'url', css=os.path.join(TEST_ROOT,  'fixtures/example.css'))
 
         with self.assertRaises(r.SourceError):
             r.to_img()
 
     def test_stylesheet_adding_to_file_with_option(self):
-        css = 'fixtures/example.css'
-        r = imgkit.IMGKit('fixtures/example.html', 'file', css=css)
+        css = os.path.join(TEST_ROOT,  'fixtures/example.css')
+        r = imgkit.IMGKit(os.path.join(TEST_ROOT,  'fixtures/example.html'), 'file', css=css)
         self.assertEqual(r.css, css)
         r._prepend_css(css)
         self.assertIn('font-size', r.source.to_s())
@@ -389,14 +389,14 @@ class TestIMGKitGeneration(unittest.TestCase):
             r.to_img()
 
     def test_pdf_generation_from_file_like(self):
-        with open('fixtures/example.html', 'r') as f:
+        with open(os.path.join(TEST_ROOT,  'fixtures/example.html'), 'r') as f:
             r = imgkit.IMGKit(f, 'file')
             output = r.to_img()
         self.assertEqual(output[:4], b'\xff\xd8\xff\xe0')  # TODO img
 
     def test_raise_error_with_wrong_css_path(self):
-        css = 'fixtures/wrongpath.css'
-        r = imgkit.IMGKit('fixtures/example.html', 'file', css=css)
+        css = os.path.join(TEST_ROOT,  'fixtures/wrongpath.css')
+        r = imgkit.IMGKit(os.path.join(TEST_ROOT,  'fixtures/example.html'), 'file', css=css)
         with self.assertRaises(IOError):
             r.to_img()
 
