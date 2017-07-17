@@ -99,6 +99,17 @@ options = {
 imgkit.from_url('http://google.com', 'out.png', options=options)
 ```
 
+At some headless servers, perhaps you need to install **xvfb**:
+
+``` bash
+# at ubuntu server, etc.
+sudo apt-get install xvfb
+# at centos server, etc.
+yum install xorg-x11-server-Xvfb
+```
+
+Then use **IMGKit** with option **xvfb**: `{"xvfb": ""}`.
+
 By default, IMGKit will show all `wkhtmltoimage` output. If you don't want it, you need to pass `quiet` option:
 
 
