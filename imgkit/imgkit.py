@@ -82,6 +82,9 @@ class IMGKit(object):
         if '--xvfb' in options:
             options.remove('--xvfb')
             yield self.xvfb
+            # auto servernum option to prevent failure on concurrent runs
+            # https://bugs.launchpad.net/ubuntu/+source/xorg-server/+bug/348052
+            yield '-a'
 
         yield self.wkhtmltoimage
 
