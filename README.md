@@ -167,10 +167,10 @@ imgkit.from_string(body, 'out.png')
 
 Each API call takes an optional config paramater. This should be an instance of `imgkit.config()` API call. It takes the config options as initial paramaters. The available options are:
 
-* `wkhtmltoimage` - the location of the wkhtmltoimage` binary. By default imgkit` will attempt to locate this using which` (on UNIX type systems) or where` (on Windows).
+* `wkhtmltoimage` - the location of the `wkhtmltoimage` binary. By default `imgkit` will attempt to locate this using which` (on UNIX type systems) or where` (on Windows).
 * `meta_tag_prefix` - the prefix for `imgkit` specific meta tags - by default this is `imgkit-`
 
-Example - for when wkhtmltopdf` is not in $PATH`:
+Example - for when `wkhtmltopdf` is not in `$PATH`:
 
 ``` python
 config = imgkit.config(wkhtmltoimage='/opt/bin/wkhtmltoimage')
@@ -190,4 +190,4 @@ imgkit.from_string(html_string, output_file, config=config)
 
 ## Credit
 
-This is library edited from [python PDFKit](https://github.com/JazzCore/python-pdfkit)
+[python PDFKit](https://github.com/JazzCore/python-pdfkit)
