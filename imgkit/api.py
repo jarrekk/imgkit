@@ -3,7 +3,13 @@ from .imgkit import IMGKit
 from .config import Config
 
 
-def from_url(url, output_path, options=None, toc=None, cover=None, config=None, cover_first=None):
+def from_url(url,
+             output_path,
+             options=None,
+             toc=None,
+             cover=None,
+             config=None,
+             cover_first=None):
     """
     Convert URL/URLs to IMG file/files
 
@@ -17,11 +23,23 @@ def from_url(url, output_path, options=None, toc=None, cover=None, config=None, 
     :param cover_first: (optional) if True, cover always precedes TOC
     :return: True when success
     """
-    rtn = IMGKit(url, 'url', options=options, toc=toc, cover=cover, config=config, cover_first=cover_first)
+    rtn = IMGKit(url,
+                 'url',
+                 options=options,
+                 toc=toc, cover=cover,
+                 config=config,
+                 cover_first=cover_first)
     return rtn.to_img(output_path)
 
 
-def from_file(filename, output_path, options=None, toc=None, cover=None, css=None, config=None, cover_first=None):
+def from_file(filename,
+              output_path,
+              options=None,
+              toc=None,
+              cover=None,
+              css=None,
+              config=None,
+              cover_first=None):
     """
     Convert HTML file/files to IMG file/files
 
@@ -35,12 +53,25 @@ def from_file(filename, output_path, options=None, toc=None, cover=None, css=Non
     :param cover_first: (optional) if True, cover always precedes TOC
     :return: True when success
     """
-    rtn = IMGKit(filename, 'file', options=options, toc=toc, cover=cover, css=css,
-                 config=config, cover_first=cover_first)
+    rtn = IMGKit(filename,
+                 'file',
+                 options=options,
+                 toc=toc,
+                 cover=cover,
+                 css=css,
+                 config=config,
+                 cover_first=cover_first)
     return rtn.to_img(output_path)
 
 
-def from_string(string, output_path, options=None, toc=None, cover=None, css=None, config=None, cover_first=None):
+def from_string(string,
+                output_path,
+                options=None,
+                toc=None,
+                cover=None,
+                css=None,
+                config=None,
+                cover_first=None):
     """
     Convert given string/strings to IMG file
 
