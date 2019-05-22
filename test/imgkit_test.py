@@ -13,7 +13,6 @@ import imgkit
 
 
 class TestIMGKitInitialization(unittest.TestCase):
-    """Test init"""
 
     def test_html_source(self):
         r = imgkit.IMGKit('<h1>Oh hai</h1>', 'string')
@@ -112,7 +111,6 @@ class TestIMGKitInitialization(unittest.TestCase):
 
 
 class TestIMGKitCommandGeneration(unittest.TestCase):
-    """Test command() method"""
 
     def test_command_construction(self):
         r = imgkit.IMGKit('html', 'string', options={'format': 'jpg', 'toc-l1-font-size': 12})
@@ -291,7 +289,6 @@ class TestIMGKitCommandGeneration(unittest.TestCase):
 
 
 class TestIMGKitGeneration(unittest.TestCase):
-    """Test to_img() method"""
 
     def setUp(self):
         pass
@@ -323,7 +320,6 @@ class TestIMGKitGeneration(unittest.TestCase):
             imgkit.IMGKit(paths, 'file')
 
     def test_stylesheet_adding_to_the_head(self):
-        # TODO rewrite this part of pdfkit.py
         r = imgkit.IMGKit('<html><head></head><body>Hai!</body></html>', 'string',
                           css='fixtures/example.css')
 
@@ -331,7 +327,7 @@ class TestIMGKitGeneration(unittest.TestCase):
             css = f.read()
 
         r._prepend_css('fixtures/example.css')
-        self.assertIn('<style>%s</style>' % css, r.source.to_s())
+        self.assertIn('<style>{}</style>'.format(css), r.source.to_s())
 
     def test_stylesheet_adding_without_head_tag(self):
         r = imgkit.IMGKit('<html><body>Hai!</body></html>', 'string',
@@ -341,10 +337,9 @@ class TestIMGKitGeneration(unittest.TestCase):
             css = f.read()
 
         r._prepend_css('fixtures/example.css')
-        self.assertIn('<style>%s</style><html>' % css, r.source.to_s())
+        self.assertIn('<style>{}</style><html>'.format(css), r.source.to_s())
 
     def test_multiple_stylesheets_adding_to_the_head(self):
-        # TODO rewrite this part of pdfkit.py
         css_files = ['fixtures/example.css', 'fixtures/example2.css']
         r = imgkit.IMGKit('<html><head></head><body>Hai!</body></html>', 'string',
                           css=css_files)
@@ -355,7 +350,7 @@ class TestIMGKitGeneration(unittest.TestCase):
                 css.append(f.read())
 
         r._prepend_css(css_files)
-        self.assertIn('<style>%s</style>' % "\n".join(css), r.source.to_s())
+        self.assertIn('<style>{}</style>'.format("\n".join(css)), r.source.to_s())
 
     def test_multiple_stylesheet_adding_without_head_tag(self):
         css_files = ['fixtures/example.css', 'fixtures/example2.css']
@@ -368,7 +363,7 @@ class TestIMGKitGeneration(unittest.TestCase):
                 css.append(f.read())
 
         r._prepend_css(css_files)
-        self.assertIn('<style>%s</style><html>' % "\n".join(css), r.source.to_s())
+        self.assertIn('<style>{}</style><html>'.format("\n".join(css)), r.source.to_s())
 
     def test_stylesheet_throw_error_when_url(self):
         r = imgkit.IMGKit('http://ya.ru', 'url', css='fixtures/example.css')
@@ -388,11 +383,11 @@ class TestIMGKitGeneration(unittest.TestCase):
         with self.assertRaises(IOError):
             r.to_img()
 
-    def test_pdf_generation_from_file_like(self):
+    def test_image_generation_from_file(self):
         with open('fixtures/example.html', 'r') as f:
             r = imgkit.IMGKit(f, 'file')
             output = r.to_img()
-        self.assertEqual(output[:4], b'\xff\xd8\xff\xe0')  # TODO img
+        self.assertEqual(output[:4], b'\xff\xd8\xff\xe0')
 
     def test_raise_error_with_wrong_css_path(self):
         css = 'fixtures/wrongpath.css'
@@ -413,7 +408,6 @@ class TestIMGKitGeneration(unittest.TestCase):
 
 
 class TestIMGKitAPI(unittest.TestCase):
-    """Test API"""
 
     def test_from_string(self):
         pic = imgkit.from_string('hello imgkit!', 'out.jpg')

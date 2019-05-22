@@ -1,30 +1,44 @@
 # -*- coding: utf-8 -*-
 import subprocess
-import sys
+from subprocess import CalledProcessError
 
 
 class Config(object):
-    def __init__(self, wkhtmltoimage='', meta_tag_prefix='imgkit-'):
+    def __init__(self, wkhtmltoimage='', xvfb='', meta_tag_prefix='imgkit-'):
+        """
+        Configure wkhtmltoimage, xvfb, meta_tag_prefix.
+
+        :param wkhtmltoimage: wkhtmltoimage path
+        :param xvfb: xvfb path
+        :param meta_tag_prefix: the prefix for `imgkit` specific meta tags - by default this is `imgkit-`
+        """
+        self.wkhtmltoimage = wkhtmltoimage
+        self.xvfb = xvfb
         self.meta_tag_prefix = meta_tag_prefix
 
-        self.wkhtmltoimage = wkhtmltoimage
-
-        self.xvfb = ''
-
         if not self.wkhtmltoimage:
-            if sys.platform == 'win32':
-                self.wkhtmltoimage = subprocess.Popen(['where', 'wkhtmltoimage'],
-                                                      stdout=subprocess.PIPE).communicate()[0].strip()
-            else:
-                self.wkhtmltoimage = subprocess.Popen(['which', 'wkhtmltoimage'],
-                                                      stdout=subprocess.PIPE).communicate()[0].strip()
+            # get wkhtmltoimage in *nix/windows server
+            # see https://github.com/jarrekk/imgkit/issues/57 for windows condition
+            for find_cmd in ('where', 'which'):
+                try:
+                    self.wkhtmltoimage = subprocess.check_output([find_cmd, 'wkhtmltoimage']).strip()
+                    break
+                except CalledProcessError:
+                    self.wkhtmltoimage = ''
+                except OSError:
+                    self.wkhtmltoimage = ''
+
         if not self.xvfb:
-            if sys.platform == 'win32':
-                self.xvfb = subprocess.Popen(['where', 'xvfb-run'],
-                                             stdout=subprocess.PIPE).communicate()[0].strip()
-            else:
-                self.xvfb = subprocess.Popen(['which', 'xvfb-run'],
-                                             stdout=subprocess.PIPE).communicate()[0].strip()
+            # get xvfb in *nix/windows server
+            # see https://github.com/jarrekk/imgkit/issues/57 for windows condition
+            for find_cmd in ('where', 'which'):
+                try:
+                    self.xvfb = subprocess.check_output([find_cmd, 'xvfb-run']).strip()
+                    break
+                except CalledProcessError:
+                    self.xvfb = ''
+                except OSError:
+                    self.xvfb = ''
 
         try:
             with open(self.wkhtmltoimage):
@@ -34,3 +48,11 @@ class Config(object):
                           'If this file exists please check that this process can '
                           'read it. Otherwise please install wkhtmltopdf - '
                           'http://wkhtmltopdf.org\n'.format(self.wkhtmltoimage))
+        if self.xvfb:
+            try:
+                with open(self.xvfb):
+                    pass
+            except IOError:
+                raise IOError('No xvfb executable found: "{0}"\n'
+                              'If this file exists please check that this process can '
+                              'read it. Otherwise please install xvfb -'.format(self.xvfb))
