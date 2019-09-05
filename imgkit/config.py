@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import shutil
+import subprocess
+import sys
 
 
 class Config(object):
@@ -11,18 +12,25 @@ class Config(object):
         self.xvfb = ''
 
         if not self.wkhtmltoimage:
-            self.wkhtmltoimage = shutil.which("wkhtmltoimage")
-
+            if sys.platform == 'win32':
+                self.wkhtmltoimage = subprocess.Popen(['where', 'wkhtmltoimage'],
+                                                      stdout=subprocess.PIPE).communicate()[0].strip()
+            else:
+                self.wkhtmltoimage = subprocess.Popen(['which', 'wkhtmltoimage'],
+                                                      stdout=subprocess.PIPE).communicate()[0].strip()
         if not self.xvfb:
-            self.xvfb = shutil.which("xvfb-run")
+            if sys.platform == 'win32':
+                self.xvfb = subprocess.Popen(['where', 'xvfb-run'],
+                                             stdout=subprocess.PIPE).communicate()[0].strip()
+            else:
+                self.xvfb = subprocess.Popen(['which', 'xvfb-run'],
+                                             stdout=subprocess.PIPE).communicate()[0].strip()
 
-        if not self.wkhtmltoimage:
+        try:
+            with open(self.wkhtmltoimage):
+                pass
+        except IOError:
             raise IOError('No wkhtmltoimage executable found: "{0}"\n'
                           'If this file exists please check that this process can '
                           'read it. Otherwise please install wkhtmltopdf - '
                           'http://wkhtmltopdf.org\n'.format(self.wkhtmltoimage))
-
-        if not self.xvfb:
-            raise IOError('No xvfb-run executable found: "{0}"\n'
-                          'If this file exists please check that this process can '
-                          'read it. Otherwise please install xvfb-run'.format(self.xvfb))
