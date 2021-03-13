@@ -168,12 +168,13 @@ imgkit.from_string(body, 'out.png')
 Each API call takes an optional config paramater. This should be an instance of `imgkit.config()` API call. It takes the config options as initial paramaters. The available options are:
 
 * `wkhtmltoimage` - the location of the `wkhtmltoimage` binary. By default `imgkit` will attempt to locate this using which` (on UNIX type systems) or where` (on Windows).
+* `xvfb` - the location of the `xvfb-run` binary. By default `imgkit` will attempt to locate this using which` (on UNIX type systems) or where` (on Windows).
 * `meta_tag_prefix` - the prefix for `imgkit` specific meta tags - by default this is `imgkit-`
 
-Example - for when `wkhtmltopdf` is not in `$PATH`:
+Example - for when `wkhtmltopdf` or `xvfb` is not in `$PATH`:
 
 ``` python
-config = imgkit.config(wkhtmltoimage='/opt/bin/wkhtmltoimage')
+config = imgkit.config(wkhtmltoimage='/opt/bin/wkhtmltoimage', xvfb='/opt/bin/xvfb-run')
 imgkit.from_string(html_string, output_file, config=config)
 ```
 
@@ -183,7 +184,9 @@ imgkit.from_string(html_string, output_file, config=config)
 * `IOError: 'No wkhtmltopdf executable found'`:
 
   Make sure that you have wkhtmltoimage in your `$PATH` or set via custom configuration (see preceding section). *where wkhtmltoimage* in Windows or *which wkhtmltoimage* on Linux should return actual path to binary.
+* `IOError: 'No xvfb executable found'`:
 
+  Make sure that you have xvfb-run in your `$PATH` or set via custom configuration (see preceding section). *where xvfb* in Windows or *which xvfb-run* or *which Xvfb* on Linux should return actual path to binary.
 * `IOError: 'Command Failed'`:
 
   This error means that IMGKit was unable to process an input. You can try to directly run a command from error message and see what error caused failure (on some wkhtmltoimage versions this can be cause by segmentation faults)

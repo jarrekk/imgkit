@@ -14,7 +14,7 @@ def from_url(url,
     Convert URL/URLs to IMG file/files
 
     :param url: URL or list of URLs to be saved
-    :param output_path: path to output PDF file/files. False means file will be returned as string
+    :param output_path: path to output image file/files. False means file will be returned as string
     :param options: (optional) dict with wkhtmltopdf global and page options, with or w/o '--'
     :param toc: (optional) dict with toc-specific wkhtmltopdf options, with or w/o '--'
     :param cover: (optional) string with url/filename with a cover html page
@@ -44,7 +44,7 @@ def from_file(filename,
     Convert HTML file/files to IMG file/files
 
     :param filename: path of HTML file or list with paths or file-like object
-    :param output_path: path to output PDF file/files. False means file will be returned as string
+    :param output_path: path to output image file/files. False means file will be returned as string
     :param options: (optional) dict with wkhtmltopdf global and page options, with or w/o '--'
     :param toc: (optional) dict with toc-specific wkhtmltopdf options, with or w/o '--'
     :param cover: (optional) string with url/filename with a cover html page
@@ -95,7 +95,7 @@ def config(**kwargs):
     Constructs and returns a :class:`Config` with given options
 
     :param wkhtmltopdf: path to binary
-    :param meta_tag_prefix: the prefix for ``pdfkit`` specific meta tags
+    :param meta_tag_prefix: the prefix for ``imgkit`` specific meta tags
     """
 
     return Config(**kwargs)

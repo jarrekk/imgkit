@@ -4,12 +4,12 @@ import sys
 
 
 class Config(object):
-    def __init__(self, wkhtmltoimage='', meta_tag_prefix='imgkit-'):
+    def __init__(self, wkhtmltoimage='', xvfb='', meta_tag_prefix='imgkit-'):
         self.meta_tag_prefix = meta_tag_prefix
 
         self.wkhtmltoimage = wkhtmltoimage
 
-        self.xvfb = ''
+        self.xvfb = xvfb
 
         if not self.wkhtmltoimage:
             if sys.platform == 'win32':
@@ -34,3 +34,11 @@ class Config(object):
                           'If this file exists please check that this process can '
                           'read it. Otherwise please install wkhtmltopdf - '
                           'http://wkhtmltopdf.org\n'.format(self.wkhtmltoimage))
+        else:
+          try:
+            with open(self.xvfb):
+                pass
+          except IOError:
+              raise IOError('No xvfb executable found: "{0}"\n'
+                            'If this file exists please check that this process can '
+                            'read it. Otherwise please install xvfb -'.format(self.xvfb))

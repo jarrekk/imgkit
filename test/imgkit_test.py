@@ -323,7 +323,6 @@ class TestIMGKitGeneration(unittest.TestCase):
             imgkit.IMGKit(paths, 'file')
 
     def test_stylesheet_adding_to_the_head(self):
-        # TODO rewrite this part of pdfkit.py
         r = imgkit.IMGKit('<html><head></head><body>Hai!</body></html>', 'string',
                           css='fixtures/example.css')
 
@@ -344,7 +343,6 @@ class TestIMGKitGeneration(unittest.TestCase):
         self.assertIn('<style>%s</style><html>' % css, r.source.to_s())
 
     def test_multiple_stylesheets_adding_to_the_head(self):
-        # TODO rewrite this part of pdfkit.py
         css_files = ['fixtures/example.css', 'fixtures/example2.css']
         r = imgkit.IMGKit('<html><head></head><body>Hai!</body></html>', 'string',
                           css=css_files)
@@ -388,11 +386,11 @@ class TestIMGKitGeneration(unittest.TestCase):
         with self.assertRaises(IOError):
             r.to_img()
 
-    def test_pdf_generation_from_file_like(self):
+    def test_image_generation_from_file(self):
         with open('fixtures/example.html', 'r') as f:
             r = imgkit.IMGKit(f, 'file')
             output = r.to_img()
-        self.assertEqual(output[:4], b'\xff\xd8\xff\xe0')  # TODO img
+        self.assertEqual(output[:4], b'\xff\xd8\xff\xe0')
 
     def test_raise_error_with_wrong_css_path(self):
         css = 'fixtures/wrongpath.css'
