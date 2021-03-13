@@ -33,7 +33,7 @@ deploy:
     tags: true
     distributions: sdist bdist_wheel
     repo: jarrekk/imgkit
-    python: 2.7
+    python: 3.7
 
 notifications:
   email: me@jarrekk.com
