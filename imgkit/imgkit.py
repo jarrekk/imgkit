@@ -143,19 +143,21 @@ class IMGKit(object):
             if '--' in key:
                 normalized_key = self._normalize_arg(key)
             else:
-                normalized_key = '--%s' % self._normalize_arg(key)
+                normalized_key = '--{}'.format(self._normalize_arg(key))
 
             if isinstance(value, (list, tuple)):
                 for opt_val in value:
-                    yield (normalized_key, opt_val)
+                    yield normalized_key, opt_val
             else:
-                yield (normalized_key, str(value) if value else value)
+                yield normalized_key, str(value) if value else value
 
-    def _normalize_arg(self, arg):
+    @staticmethod
+    def _normalize_arg(arg):
         return arg.lower()
 
-    def _style_tag(self, stylesheet):
-        return "<style>%s</style>" % stylesheet
+    @staticmethod
+    def _style_tag(stylesheet):
+        return "<style>{}</style>".format(stylesheet)
 
     def _prepend_css(self, path):
         if self.source.isUrl() or isinstance(self.source.source, list):
@@ -193,15 +195,14 @@ class IMGKit(object):
           dict: {config option: value}
         """
         if (isinstance(content, io.IOBase)
-            or content.__class__.__name__ == 'StreamReaderWriter'):
+                or content.__class__.__name__ == 'StreamReaderWriter'):
             content = content.read()
 
         found = {}
 
         for x in re.findall('<meta [^>]*>', content):
-            if re.search('name=["\']%s' % self.config.meta_tag_prefix, x):
-                name = re.findall('name=["\']%s([^"\']*)' %
-                                  self.config.meta_tag_prefix, x)[0]
+            if re.search('name=["\']{}'.format(self.config.meta_tag_prefix), x):
+                name = re.findall('name=["\']{}([^"\']*)'.format(self.config.meta_tag_prefix), x)[0]
                 found[name] = re.findall('content=["\']([^"\']*)', x)[0]
 
         return found
@@ -209,8 +210,7 @@ class IMGKit(object):
     def to_img(self, path=None):
         args = self.command(path)
 
-        result = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                                  stderr=subprocess.PIPE)
+        result = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         # If the source is a string then we will pipe it into wkhtmltoimage.
         # If we want to add custom CSS to file then we read input file to
@@ -231,10 +231,10 @@ class IMGKit(object):
         exit_code = result.returncode
 
         if 'cannot connect to X server' in stderr:
-            raise IOError('%s\n'
+            raise IOError('{}\n'
                           'You will need to run wkhtmltoimage within a "virtual" X server.\n'
                           'Go to the link below for more information\n'
-                          'http://wkhtmltopdf.org' % stderr)
+                          'http://wkhtmltopdf.org'.format(stderr))
 
         if 'Error' in stderr:
             raise IOError('wkhtmltoimage reported an error:\n' + stderr)
@@ -243,7 +243,8 @@ class IMGKit(object):
             xvfb_error = ''
             if 'QXcbConnection' in stderr:
                 xvfb_error = 'You need to install xvfb(sudo apt-get install xvfb, yum install xorg-x11-server-Xvfb, etc), then add option: {"xvfb": ""}.'
-            raise IOError("wkhtmltoimage exited with non-zero code {0}. error:\n{1}\n\n{2}".format(exit_code, stderr, xvfb_error))
+            raise IOError(
+                "wkhtmltoimage exited with non-zero code {0}. error:\n{1}\n\n{2}".format(exit_code, stderr, xvfb_error))
 
         # Since wkhtmltoimage sends its output to stderr we will capture it
         # and properly send to stdout
@@ -257,11 +258,11 @@ class IMGKit(object):
                 with codecs.open(path, mode='rb') as f:
                     text = f.read(4)
                     if text == '':
-                        raise IOError('Command failed: %s\n'
-                                      'Check whhtmltoimage output without \'quiet\' '
-                                      'option' % ' '.join(args))
+                        raise IOError("Command failed: {}\n"
+                                      "Check whhtmltoimage output without "
+                                      "'quiet' option".format(' '.join(args)))
                     return True
             except IOError as e:
-                raise IOError('Command failed: %s\n'
-                              'Check whhtmltoimage output without \'quiet\' option\n'
-                              '%s ' % (' '.join(args)), e)
+                raise IOError("Command failed: {0}\n"
+                              "Check whhtmltoimage output without "
+                              "'quiet' option\n{1} ".format(' '.join(args), e))

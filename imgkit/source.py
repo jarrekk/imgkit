@@ -8,7 +8,7 @@ class Source(object):
         self.source = url_or_file
         self.type = type_
 
-        if self.type is 'file':
+        if self.type == 'file':
             self.checkFiles()
 
     def isUrl(self):
@@ -26,10 +26,10 @@ class Source(object):
         if isinstance(self.source, list):
             for path in self.source:
                 if not os.path.exists(path):
-                    raise IOError('No such file: %s' % path)
+                    raise IOError('No such file: {}'.format(path))
         else:
             if not hasattr(self.source, 'read') and not os.path.exists(self.source):
-                raise IOError('No such file: %s' % self.source)
+                raise IOError('No such file: {}'.format(self.source))
 
     def isString(self):
         return 'string' in self.type

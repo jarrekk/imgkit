@@ -18,7 +18,6 @@ def from_url(url,
     :param options: (optional) dict with wkhtmltopdf global and page options, with or w/o '--'
     :param toc: (optional) dict with toc-specific wkhtmltopdf options, with or w/o '--'
     :param cover: (optional) string with url/filename with a cover html page
-    :param css: style of input
     :param config: (optional) instance of imgkit.config.Config()
     :param cover_first: (optional) if True, cover always precedes TOC
     :return: True when success

@@ -5,7 +5,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/aa1f67f04ff24bb080b7f8c8a9b7b8b1)](https://www.codacy.com/app/jarrekk/imgkit?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jarrekk/imgkit&amp;utm_campaign=Badge_Grade)
 [![PyPI version](https://badge.fury.io/py/imgkit.svg)](https://badge.fury.io/py/imgkit)
 
-```
+``` text
   _____   __  __    _____   _  __  _   _
  |_   _| |  \/  |  / ____| | |/ / (_) | |
    | |   | \  / | | |  __  | ' /   _  | |_
@@ -27,21 +27,23 @@ Python 2 and 3 wrapper for wkhtmltoimage utility to convert HTML to IMG using We
 
 2. Install wkhtmltopdf:
 
-  * Debian/Ubuntu:
+    * Debian/Ubuntu:
 
-    ``` bash
-    sudo apt-get install wkhtmltopdf
-    ```
+        ``` bash
+        sudo apt-get install wkhtmltopdf
+        ```
+        
+        **Warning!** Version in debian/ubuntu repos have reduced functionality (because it compiled without the wkhtmltopdf QT patches), such as adding outlines, headers, footers, TOC etc. To use this options you should install static binary from [wkhtmltopdf](http://wkhtmltopdf.org/) site or you can use this [script](https://github.com/jarrekk/imgkit/blob/master/travis/init.sh).
 
-    **Warning!** Version in debian/ubuntu repos have reduced functionality (because it compiled without the wkhtmltopdf QT patches), such as adding outlines, headers, footers, TOC etc. To use this options you should install static binary from [wkhtmltopdf](http://wkhtmltopdf.org/) site or you can use this [script](https://github.com/jarrekk/imgkit/blob/master/travis/init.sh).
+    * MacOSX:
 
-  * MacOSX
+        ``` bash
+        brew install --cask wkhtmltopdf
+        ```
 
-    ``` bash
-    brew install wkhtmltopdf
-    ```
-
-  * Windows and other options: check [wkhtmltopdf homepage](http://wkhtmltopdf.org/) for binary installers or [wiki page](https://github.com/pdfkit/pdfkit/wiki/Installing-WKHTMLTOPDF).
+    * Windows and other options: 
+      
+        Check [wkhtmltopdf homepage](http://wkhtmltopdf.org/) for binary installers or [wiki page](https://github.com/pdfkit/pdfkit/wiki/Installing-WKHTMLTOPDF).
 
 ## Usage
 
@@ -53,13 +55,6 @@ import imgkit
 imgkit.from_url('http://google.com', 'out.jpg')
 imgkit.from_file('test.html', 'out.jpg')
 imgkit.from_string('Hello!', 'out.jpg')
-```
-
-You can pass a list with multiple URLs or files:
-
-``` python
-imgkit.from_url(['google.com', 'yandex.ru', 'engadget.com'], 'out.jpg')
-imgkit.from_file(['file1.html', 'file2.html'], 'out.jpg')
 ```
 
 Also you can pass an opened file:
@@ -167,9 +162,9 @@ imgkit.from_string(body, 'out.png')
 
 Each API call takes an optional config paramater. This should be an instance of `imgkit.config()` API call. It takes the config options as initial paramaters. The available options are:
 
-* `wkhtmltoimage` - the location of the `wkhtmltoimage` binary. By default `imgkit` will attempt to locate this using which` (on UNIX type systems) or where` (on Windows).
-* `xvfb` - the location of the `xvfb-run` binary. By default `imgkit` will attempt to locate this using which` (on UNIX type systems) or where` (on Windows).
-* `meta_tag_prefix` - the prefix for `imgkit` specific meta tags - by default this is `imgkit-`
+  * `wkhtmltoimage` - the location of the `wkhtmltoimage` binary. By default `imgkit` will attempt to locate this using which` (on UNIX type systems) or where` (on Windows).
+  * `xvfb` - the location of the `xvfb-run` binary. By default `imgkit` will attempt to locate this using which` (on UNIX type systems) or where` (on Windows).
+  * `meta_tag_prefix` - the prefix for `imgkit` specific meta tags - by default this is `imgkit-`
 
 Example - for when `wkhtmltopdf` or `xvfb` is not in `$PATH`:
 
@@ -178,18 +173,19 @@ config = imgkit.config(wkhtmltoimage='/opt/bin/wkhtmltoimage', xvfb='/opt/bin/xv
 imgkit.from_string(html_string, output_file, config=config)
 ```
 
-
 ## Troubleshooting
 
 * `IOError: 'No wkhtmltopdf executable found'`:
+    
+    Make sure that you have wkhtmltoimage in your `$PATH` or set via custom configuration (see preceding section). *where wkhtmltoimage* in Windows or *which wkhtmltoimage* on Linux should return actual path to binary.
 
-  Make sure that you have wkhtmltoimage in your `$PATH` or set via custom configuration (see preceding section). *where wkhtmltoimage* in Windows or *which wkhtmltoimage* on Linux should return actual path to binary.
 * `IOError: 'No xvfb executable found'`:
+    
+    Make sure that you have xvfb-run in your `$PATH` or set via custom configuration (see preceding section). *where xvfb* in Windows or *which xvfb-run* or *which Xvfb* on Linux should return actual path to binary.
 
-  Make sure that you have xvfb-run in your `$PATH` or set via custom configuration (see preceding section). *where xvfb* in Windows or *which xvfb-run* or *which Xvfb* on Linux should return actual path to binary.
 * `IOError: 'Command Failed'`:
-
-  This error means that IMGKit was unable to process an input. You can try to directly run a command from error message and see what error caused failure (on some wkhtmltoimage versions this can be cause by segmentation faults)
+    
+    This error means that IMGKit was unable to process an input. You can try to directly run a command from error message and see what error caused failure (on some wkhtmltoimage versions this can be cause by segmentation faults)
 
 ## Credit
 

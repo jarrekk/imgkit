@@ -330,7 +330,7 @@ class TestIMGKitGeneration(unittest.TestCase):
             css = f.read()
 
         r._prepend_css('fixtures/example.css')
-        self.assertIn('<style>%s</style>' % css, r.source.to_s())
+        self.assertIn('<style>{}</style>'.format(css), r.source.to_s())
 
     def test_stylesheet_adding_without_head_tag(self):
         r = imgkit.IMGKit('<html><body>Hai!</body></html>', 'string',
@@ -340,7 +340,7 @@ class TestIMGKitGeneration(unittest.TestCase):
             css = f.read()
 
         r._prepend_css('fixtures/example.css')
-        self.assertIn('<style>%s</style><html>' % css, r.source.to_s())
+        self.assertIn('<style>{}</style><html>'.format(css), r.source.to_s())
 
     def test_multiple_stylesheets_adding_to_the_head(self):
         css_files = ['fixtures/example.css', 'fixtures/example2.css']
@@ -353,7 +353,7 @@ class TestIMGKitGeneration(unittest.TestCase):
                 css.append(f.read())
 
         r._prepend_css(css_files)
-        self.assertIn('<style>%s</style>' % "\n".join(css), r.source.to_s())
+        self.assertIn('<style>{}</style>'.format("\n".join(css)), r.source.to_s())
 
     def test_multiple_stylesheet_adding_without_head_tag(self):
         css_files = ['fixtures/example.css', 'fixtures/example2.css']
@@ -366,7 +366,7 @@ class TestIMGKitGeneration(unittest.TestCase):
                 css.append(f.read())
 
         r._prepend_css(css_files)
-        self.assertIn('<style>%s</style><html>' % "\n".join(css), r.source.to_s())
+        self.assertIn('<style>{}</style><html>'.format("\n".join(css)), r.source.to_s())
 
     def test_stylesheet_throw_error_when_url(self):
         r = imgkit.IMGKit('http://ya.ru', 'url', css='fixtures/example.css')
