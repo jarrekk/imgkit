@@ -32,7 +32,7 @@ Python 2 and 3 wrapper for wkhtmltoimage utility to convert HTML to IMG using We
         ``` bash
         sudo apt-get install wkhtmltopdf
         ```
-        
+
         **Warning!** Version in debian/ubuntu repos have reduced functionality (because it compiled without the wkhtmltopdf QT patches), such as adding outlines, headers, footers, TOC etc. To use this options you should install static binary from [wkhtmltopdf](http://wkhtmltopdf.org/) site or you can use this [script](https://github.com/jarrekk/imgkit/blob/master/travis/init.sh).
 
     * MacOSX:
@@ -41,8 +41,8 @@ Python 2 and 3 wrapper for wkhtmltoimage utility to convert HTML to IMG using We
         brew install --cask wkhtmltopdf
         ```
 
-    * Windows and other options: 
-      
+    * Windows and other options:
+
         Check [wkhtmltopdf homepage](http://wkhtmltopdf.org/) for binary installers or [wiki page](https://github.com/pdfkit/pdfkit/wiki/Installing-WKHTMLTOPDF).
 
 ## Usage
@@ -176,15 +176,15 @@ imgkit.from_string(html_string, output_file, config=config)
 ## Troubleshooting
 
 * `IOError: 'No wkhtmltopdf executable found'`:
-    
+
     Make sure that you have wkhtmltoimage in your `$PATH` or set via custom configuration (see preceding section). *where wkhtmltoimage* in Windows or *which wkhtmltoimage* on Linux should return actual path to binary.
 
 * `IOError: 'No xvfb executable found'`:
-    
+
     Make sure that you have xvfb-run in your `$PATH` or set via custom configuration (see preceding section). *where xvfb* in Windows or *which xvfb-run* or *which Xvfb* on Linux should return actual path to binary.
 
 * `IOError: 'Command Failed'`:
-    
+
     This error means that IMGKit was unable to process an input. You can try to directly run a command from error message and see what error caused failure (on some wkhtmltoimage versions this can be cause by segmentation faults)
 
 ## Credit
