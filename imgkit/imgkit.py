@@ -6,12 +6,7 @@ from .source import Source
 from .config import Config
 import io
 import codecs
-
-# Python 2.x and 3.x support for checking string types
-try:
-    assert basestring
-except NameError:
-    basestring = str
+from six import string_types
 
 
 class IMGKit(object):
@@ -111,7 +106,7 @@ class IMGKit(object):
         if self.source.isString() or self.source.isFileObj():
             yield '-'
         else:
-            if isinstance(self.source.source, basestring):
+            if isinstance(self.source.source, string_types):
                 yield self.source.to_s()
             else:
                 for s in self.source.source:
