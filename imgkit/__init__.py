@@ -3,7 +3,7 @@
 
 __author__ = "jarrekk"
 __contact__ = "me@jarrekk.com"
-__version__ = "1.1.0"
+__version__ = "1.1.1"
 __homepage__ = "https://github.com/jarrekk/imgkit"
 __license__ = "MIT"
 
