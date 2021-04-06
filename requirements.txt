@@ -1,0 +1,4 @@
+six
+coverage
+codecov
+nose

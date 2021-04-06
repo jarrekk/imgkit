@@ -9,6 +9,7 @@
 build
 dist
 imgkit.egg-info
+__pycache__
 
 # Tests
 .tox

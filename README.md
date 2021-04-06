@@ -1,8 +1,9 @@
 # IMGKit: Python library of HTML to IMG wrapper
 
-[![Build Status](https://travis-ci.org/jarrekk/imgkit.svg?branch=master)](https://travis-ci.org/jarrekk/imgkit)
+[![Unit Test](https://github.com/jarrekk/imgkit/actions/workflows/unit_test.yml/badge.svg?branch=master)](https://github.com/jarrekk/imgkit/actions/workflows/unit_test.yml)
 [![codecov](https://codecov.io/gh/jarrekk/imgkit/branch/master/graph/badge.svg?token=pNl4TtuAzz)](https://codecov.io/gh/jarrekk/imgkit)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/aa1f67f04ff24bb080b7f8c8a9b7b8b1)](https://www.codacy.com/app/jarrekk/imgkit?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jarrekk/imgkit&amp;utm_campaign=Badge_Grade)
+[![Release](https://github.com/jarrekk/imgkit/actions/workflows/release.yml/badge.svg)](https://github.com/jarrekk/imgkit/actions/workflows/release.yml)
 [![PyPI version](https://badge.fury.io/py/imgkit.svg)](https://badge.fury.io/py/imgkit)
 
 ``` text
@@ -71,7 +72,7 @@ If you wish to further process generated IMG, you can read it to a variable:
 img = imgkit.from_url('http://google.com', False)
 ```
 
-You can find all wkhtmltoimage options by type `wkhtmltoimage` command or visit this [Manual](http://madalgo.au.dk/~jakobt/wkhtmltoxdoc/wkhtmltoimage_0.10.0_rc2-doc.html). You can drop '--' in option name. If option without value, use *None, False* or *''* for dict value:. For repeatable options (incl. allow, cookie, custom-header, post, postfile, run-script, replace) you may use a list or a tuple. With option that need multiple values (e.g. --custom-header Authorization secret) we may use a 2-tuple (see example below).
+You can find all wkhtmltoimage options by type `wkhtmltoimage` command or visit this [Manual](https://wkhtmltopdf.org/usage/wkhtmltopdf.txt). You can drop '--' in option name. If option without value, use *None, False* or *''* for dict value:. For repeatable options (incl. allow, cookie, custom-header, post, postfile, run-script, replace) you may use a list or a tuple. With option that need multiple values (e.g. --custom-header Authorization secret) we may use a 2-tuple (see example below).
 
 ``` python
 options = {
@@ -190,3 +191,16 @@ imgkit.from_string(html_string, output_file, config=config)
 ## Credit
 
 [python PDFKit](https://github.com/JazzCore/python-pdfkit)
+
+## IMGKit author
+
+* **jarrekk** <https://github.com/jarrekk>
+
+### Contributors
+
+* **v-hunt** <https://github.com/v-hunt>
+* **archydeberker** <https://github.com/archydeberker>
+* **arayate** <https://github.com/arayate>
+* **xtrntr** <https://github.com/xtrntr>
+* **mike1703** <https://github.com/mike1703>
+* **themeewa** <https://github.com/themeewa>

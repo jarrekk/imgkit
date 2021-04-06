@@ -3,9 +3,8 @@
 
 __author__ = "jarrekk"
 __contact__ = "me@jarrekk.com"
-__version__ = "1.1.0"
 __homepage__ = "https://github.com/jarrekk/imgkit"
 __license__ = "MIT"
 
+from .api import config, from_file, from_string, from_url
 from .imgkit import IMGKit
-from .api import from_url, from_file, from_string, config
