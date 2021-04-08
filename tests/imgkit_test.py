@@ -453,9 +453,6 @@ class TestECommandNotFound(unittest.TestCase):
         with self.assertRaises(IOError):
             config.get_wkhtmltoimage()
 
-        with self.assertRaises(IOError):
-            config.get_xvfb()
-
 
 if __name__ == "__main__":
     unittest.main()
