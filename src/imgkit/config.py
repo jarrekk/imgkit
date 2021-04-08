@@ -29,9 +29,11 @@ class Config:
             # see https://github.com/jarrekk/imgkit/issues/57 for windows condition
             for find_cmd in ("where", "which"):
                 try:
-                    self.wkhtmltoimage = subprocess.check_output(
-                        [find_cmd, "wkhtmltoimage"]
-                    ).strip()
+                    self.wkhtmltoimage = (
+                        subprocess.check_output([find_cmd, "wkhtmltoimage"])
+                        .strip()
+                        .decode("utf-8")
+                    )
                     break
                 except CalledProcessError:
                     self.wkhtmltoimage = "command not found"
@@ -50,9 +52,9 @@ Otherwise please install wkhtmltopdf - http://wkhtmltopdf.org\n
                 with open(self.wkhtmltoimage):
                     pass
             except IOError as io_error:
-                raise_from(IOError(wkhtmltoimage_error), io_error)
+                raise_from(OSError(wkhtmltoimage_error), io_error)
         else:
-            raise IOError(wkhtmltoimage_error)
+            raise OSError(wkhtmltoimage_error)
 
         return self.wkhtmltoimage
 
@@ -64,7 +66,11 @@ Otherwise please install wkhtmltopdf - http://wkhtmltopdf.org\n
             # see https://github.com/jarrekk/imgkit/issues/57 for windows condition
             for find_cmd in ("where", "which"):
                 try:
-                    self.xvfb = subprocess.check_output([find_cmd, "xvfb-run"]).strip()
+                    self.xvfb = (
+                        subprocess.check_output([find_cmd, "xvfb-run"])
+                        .strip()
+                        .decode("utf-8")
+                    )
                     break
                 except CalledProcessError:
                     self.xvfb = "command not found"
@@ -83,7 +89,7 @@ Otherwise please install xvfb.\n
                 with open(self.xvfb):
                     pass
             except IOError as io_error:
-                raise_from(IOError(xvfb_error), io_error)
+                raise_from(OSError(xvfb_error), io_error)
         else:
-            raise IOError(xvfb_error)
+            raise OSError(xvfb_error)
         return self.xvfb

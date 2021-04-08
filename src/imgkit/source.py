@@ -38,10 +38,10 @@ class Source:
         if isinstance(self.source, list):
             for path in self.source:
                 if not os.path.exists(path):
-                    raise IOError("No such file: {}".format(path))
+                    raise OSError("No such file: {}".format(path))
         else:
             if not hasattr(self.source, "read") and not os.path.exists(self.source):
-                raise IOError("No such file: {}".format(self.source))
+                raise OSError("No such file: {}".format(self.source))
 
     def isFileObj(self):
         return hasattr(self.source, "read")

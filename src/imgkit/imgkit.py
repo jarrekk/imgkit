@@ -25,11 +25,6 @@ class IMGKit:
             Exception.__init__(self)
             self.message = message
 
-        def __str__(self):
-            """SourceError message string"""
-
-            return self.message
-
     def __init__(self, url_or_file, source_type, options=None, config=None, **kwargs):
         """Deliver parameters into IMGkit"""
 
@@ -243,14 +238,11 @@ class IMGKit:
             string = None
         stdout, stderr = result.communicate(input=string)
         stderr = stderr or stdout
-        try:
-            stderr = stderr.decode("utf-8")
-        except UnicodeDecodeError:
-            stderr = ""
+        stderr = stderr.decode("utf-8")
         exit_code = result.returncode
 
         if "cannot connect to X server" in stderr:
-            raise IOError(
+            raise OSError(
                 "{}\n"
                 'You will need to run wkhtmltoimage within a "virtual" X server.\n'
                 "Go to the link below for more information\n"
@@ -258,13 +250,13 @@ class IMGKit:
             )
 
         if "Error" in stderr:
-            raise IOError("wkhtmltoimage reported an error:\n" + stderr)
+            raise OSError("wkhtmltoimage reported an error:\n" + stderr)
 
         if exit_code != 0:
             xvfb_error = ""
             if "QXcbConnection" in stderr:
                 xvfb_error = 'You need to install xvfb(sudo apt-get install xvfb, yum install xorg-x11-server-Xvfb, etc), then add option: {"xvfb": ""}.'
-            raise IOError(
+            raise OSError(
                 "wkhtmltoimage exited with non-zero code {0}. error:\n{1}\n\n{2}".format(
                     exit_code, stderr, xvfb_error
                 )
@@ -281,7 +273,7 @@ class IMGKit:
             with codecs.open(path, mode="rb") as f:
                 text = f.read(4)
                 if text == "":
-                    raise IOError(
+                    raise OSError(
                         "Command failed: {}\n"
                         "Check whhtmltoimage output without "
                         "'quiet' option".format(" ".join(args))
@@ -289,7 +281,7 @@ class IMGKit:
                 return True
         except IOError as io_error:
             raise_from(
-                IOError(
+                OSError(
                     "Command failed: {0}\n"
                     "Check whhtmltoimage output without "
                     "'quiet' option\n{1} ".format(" ".join(args), io_error)

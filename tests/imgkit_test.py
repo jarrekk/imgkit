@@ -97,10 +97,10 @@ class TestAIMGKitInitialization(unittest.TestCase):
         self.assertEqual("imgkit-", conf.meta_tag_prefix)
         conf = imgkit.config(meta_tag_prefix="prefix-")
         self.assertEqual("prefix-", conf.meta_tag_prefix)
-        with self.assertRaises(IOError):
+        with self.assertRaises(OSError):
             config = imgkit.config(wkhtmltoimage="wrongpath")
             config.get_wkhtmltoimage()
-        with self.assertRaises(IOError):
+        with self.assertRaises(OSError):
             config = imgkit.config(xvfb="wrongpath")
             config.get_xvfb()
 
@@ -319,14 +319,14 @@ class TestCIMGKitGeneration(unittest.TestCase):
 
     def test_raise_error_with_invalid_url(self):
         r = imgkit.IMGKit("wrongurl", "url")
-        with self.assertRaises(IOError):
+        with self.assertRaises(OSError):
             r.to_img("out.jpg")
 
     def test_raise_error_with_invalid_file_path(self):
         paths = ["frongpath.html", "wrongpath2.html"]
-        with self.assertRaises(IOError):
+        with self.assertRaises(OSError):
             imgkit.IMGKit("wrongpath.html", "file")
-        with self.assertRaises(IOError):
+        with self.assertRaises(OSError):
             imgkit.IMGKit(paths, "file")
 
     def test_stylesheet_adding_to_the_head(self):
@@ -402,7 +402,7 @@ class TestCIMGKitGeneration(unittest.TestCase):
 
     def test_wkhtmltoimage_error_handling(self):
         r = imgkit.IMGKit("clearlywrongurl.asdf", "url")
-        with self.assertRaises(IOError):
+        with self.assertRaises(OSError):
             r.to_img()
 
     def test_image_generation_from_file(self):
@@ -421,7 +421,7 @@ class TestCIMGKitGeneration(unittest.TestCase):
         r = imgkit.IMGKit(
             "<html><body>Hai!</body></html>", "string", options={"bad-option": None}
         )
-        with self.assertRaises(IOError) as cm:
+        with self.assertRaises(OSError) as cm:
             r.to_img()
 
         raised_exception = cm.exception
@@ -447,13 +447,38 @@ class TestDIMGKitAPI(unittest.TestCase):
 
 
 class TestECommandNotFound(unittest.TestCase):
-    def test_wkhtmltoimage_not_found(self):
-        os.environ["PATH"] = "/bin:/user/bin"
-        with self.assertRaises(IOError):
-            config = imgkit.config()
+    def test_cmd_not_found(self):
+        config = imgkit.config()
+        wkhtmltoimage_path = config.get_wkhtmltoimage()
+        xvfb_path = config.get_xvfb()
+        os.system("sudo mv -f {} /tmp".format(wkhtmltoimage_path))
+        os.system("sudo mv -f {} /tmp".format(xvfb_path))
+        with self.assertRaises(OSError):
             config.get_wkhtmltoimage()
 
-    # TODO add get xvfb
+        with self.assertRaises(OSError):
+            config.get_xvfb()
+
+        os.system("sudo mv -f /tmp/wkhtmltoimage {}".format(wkhtmltoimage_path))
+        os.system("sudo mv -f /tmp/xfvb-run {}".format(xvfb_path))
+
+    def test_no_where_which(self):
+        os.environ["PATH"] = "/bin"
+        config = imgkit.config()
+
+        with self.assertRaises(OSError):
+            config.get_wkhtmltoimage()
+
+        with self.assertRaises(OSError):
+            config.get_xvfb()
+
+
+class TestFNoXvfb(unittest.TestCase):
+    def test_no_xvfb(self):
+        os.system("sudo apt uninstall -y xvfb")
+        with self.assertRaises(OSError):
+            r = imgkit.IMGKit("html", "string", options={"xvfb": ""})
+            pic = r.to_img("out.jpg")
 
 
 if __name__ == "__main__":
