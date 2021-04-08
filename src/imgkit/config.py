@@ -51,7 +51,7 @@ Otherwise please install wkhtmltopdf - http://wkhtmltopdf.org\n
             try:
                 with open(self.wkhtmltoimage):
                     pass
-            except OSError as io_error:
+            except IOError as io_error:
                 raise_from(OSError(wkhtmltoimage_error), io_error)
         else:
             raise OSError(wkhtmltoimage_error)
@@ -88,7 +88,7 @@ Otherwise please install xvfb.\n
             try:
                 with open(self.xvfb):
                     pass
-            except OSError as io_error:
+            except IOError as io_error:
                 raise_from(OSError(xvfb_error), io_error)
         else:
             raise OSError(xvfb_error)
