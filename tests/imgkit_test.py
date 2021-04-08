@@ -97,10 +97,10 @@ class TestAIMGKitInitialization(unittest.TestCase):
         self.assertEqual("imgkit-", conf.meta_tag_prefix)
         conf = imgkit.config(meta_tag_prefix="prefix-")
         self.assertEqual("prefix-", conf.meta_tag_prefix)
-        with self.assertRaises(IOError):
+        with self.assertRaises(OSError):
             config = imgkit.config(wkhtmltoimage="wrongpath")
             config.get_wkhtmltoimage()
-        with self.assertRaises(IOError):
+        with self.assertRaises(OSError):
             config = imgkit.config(xvfb="wrongpath")
             config.get_xvfb()
 
