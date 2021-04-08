@@ -447,17 +447,13 @@ class TestDIMGKitAPI(unittest.TestCase):
 
 
 class TestECommandNotFound(unittest.TestCase):
-    def test_wkhtmltoimage_not_found(self):
+    def test_cmd_not_found(self):
         os.environ["PATH"] = "/bin:/user/bin"
+        config = imgkit.config()
         with self.assertRaises(IOError):
-            config = imgkit.config()
             config.get_wkhtmltoimage()
 
-    def test_xvfb_not_found(self):
-        os.environ["PATH"] = "/bin:/user/bin"
-        options = {"xvfb": ""}
         with self.assertRaises(IOError):
-            config = imgkit.config(options=options)
             config.get_xvfb()
 
 
