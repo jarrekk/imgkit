@@ -476,7 +476,7 @@ class TestECommandNotFound(unittest.TestCase):
 class TestFNoXvfb(unittest.TestCase):
     def test_no_xvfb(self):
         os.system("sudo apt uninstall -y xvfb")
-        with self.assertRaises(IOError):
+        with self.assertRaises(OSError):
             r = imgkit.IMGKit("html", "string", options={"xvfb": ""})
             pic = r.to_img("out.jpg")
 
