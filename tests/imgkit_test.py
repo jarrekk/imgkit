@@ -414,7 +414,7 @@ class TestCIMGKitGeneration(unittest.TestCase):
     def test_raise_error_with_wrong_css_path(self):
         css = "fixtures/wrongpath.css"
         r = imgkit.IMGKit("fixtures/example.html", "file", css=css)
-        with self.assertRaises(OSError):
+        with self.assertRaises(IOError):
             r.to_img()
 
     def test_raise_error_if_bad_wkhtmltoimage_option(self):
