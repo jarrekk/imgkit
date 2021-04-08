@@ -202,3 +202,7 @@ imgkit.from_string(html_string, output_file, config=config)
 - **xtrntr** <https://github.com/xtrntr>
 - **mike1703** <https://github.com/mike1703>
 - **themeewa** <https://github.com/themeewa>
+
+## Change log
+
+Go to https://github.com/jarrekk/imgkit/wiki/CHANGE-LOG.
