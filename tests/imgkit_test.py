@@ -453,6 +453,8 @@ class TestECommandNotFound(unittest.TestCase):
             config = imgkit.config()
             config.get_wkhtmltoimage()
 
+    # TODO add get xvfb
+
 
 if __name__ == "__main__":
     unittest.main()
