@@ -3,7 +3,7 @@ name: Unit Test
 on:
   push:
     branches:
-    - master
+    - '*'
     tags-ignore:
     - 'V*'
   pull_request:
@@ -39,3 +39,11 @@ jobs:
 
     - name: Run code coverage
       run: codecov
+
+    - name: wemake-python-styleguide
+      uses: wemake-services/wemake-python-styleguide
+      with:
+        reporter: 'github-pr-review'
+        path: './src/'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
