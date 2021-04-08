@@ -44,6 +44,5 @@ jobs:
       uses: wemake-services/wemake-python-styleguide
       with:
         reporter: 'github-pr-review'
-        path: './src/'
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
