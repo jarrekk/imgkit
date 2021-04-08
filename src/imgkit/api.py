@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
-from .imgkit import IMGKit
 from .config import Config
+from .imgkit import IMGKit
 
 
-def from_url(url,
-             output_path,
-             options=None,
-             toc=None,
-             cover=None,
-             config=None,
-             cover_first=None):
+def from_url(
+    url,
+    output_path,
+    options=None,
+    toc=None,
+    cover=None,
+    configuration=None,
+    cover_first=None,
+):
     """
     Convert URL/URLs to IMG file/files
 
@@ -18,27 +20,32 @@ def from_url(url,
     :param options: (optional) dict with wkhtmltopdf global and page options, with or w/o '--'
     :param toc: (optional) dict with toc-specific wkhtmltopdf options, with or w/o '--'
     :param cover: (optional) string with url/filename with a cover html page
-    :param config: (optional) instance of imgkit.config.Config()
+    :param configuration: (optional) instance of imgkit.config.Config()
     :param cover_first: (optional) if True, cover always precedes TOC
     :return: True when success
     """
-    rtn = IMGKit(url,
-                 'url',
-                 options=options,
-                 toc=toc, cover=cover,
-                 config=config,
-                 cover_first=cover_first)
+    rtn = IMGKit(
+        url,
+        "url",
+        options=options,
+        toc=toc,
+        cover=cover,
+        config=configuration,
+        cover_first=cover_first,
+    )
     return rtn.to_img(output_path)
 
 
-def from_file(filename,
-              output_path,
-              options=None,
-              toc=None,
-              cover=None,
-              css=None,
-              config=None,
-              cover_first=None):
+def from_file(
+    filename,
+    output_path,
+    options=None,
+    toc=None,
+    cover=None,
+    css=None,
+    configuration=None,
+    cover_first=None,
+):
     """
     Convert HTML file/files to IMG file/files
 
@@ -48,29 +55,33 @@ def from_file(filename,
     :param toc: (optional) dict with toc-specific wkhtmltopdf options, with or w/o '--'
     :param cover: (optional) string with url/filename with a cover html page
     :param css: style of input
-    :param config: (optional) instance of imgkit.config.Config()
+    :param configuration: (optional) instance of imgkit.config.Config()
     :param cover_first: (optional) if True, cover always precedes TOC
     :return: True when success
     """
-    rtn = IMGKit(filename,
-                 'file',
-                 options=options,
-                 toc=toc,
-                 cover=cover,
-                 css=css,
-                 config=config,
-                 cover_first=cover_first)
+    rtn = IMGKit(
+        filename,
+        "file",
+        options=options,
+        toc=toc,
+        cover=cover,
+        css=css,
+        config=configuration,
+        cover_first=cover_first,
+    )
     return rtn.to_img(output_path)
 
 
-def from_string(string,
-                output_path,
-                options=None,
-                toc=None,
-                cover=None,
-                css=None,
-                config=None,
-                cover_first=None):
+def from_string(
+    string,
+    output_path,
+    options=None,
+    toc=None,
+    cover=None,
+    css=None,
+    configuration=None,
+    cover_first=None,
+):
     """
     Convert given string/strings to IMG file
 
@@ -80,12 +91,20 @@ def from_string(string,
     :param toc: (optional) dict with toc-specific wkhtmltopdf options, with or w/o '--'
     :param cover: (optional) string with url/filename with a cover html page
     :param css: style of input
-    :param config: (optional) instance of imgkit.config.Config()
+    :param configuration: (optional) instance of imgkit.config.Config()
     :param cover_first: (optional) if True, cover always precedes TOC
     :return: True when success
     """
-    rtn = IMGKit(string, 'string', options=options, toc=toc, cover=cover, css=css,
-                 config=config, cover_first=cover_first)
+    rtn = IMGKit(
+        string,
+        "string",
+        options=options,
+        toc=toc,
+        cover=cover,
+        css=css,
+        config=configuration,
+        cover_first=cover_first,
+    )
     return rtn.to_img(output_path)
 
 

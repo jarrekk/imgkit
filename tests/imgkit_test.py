@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.realpath(os.path.join(TEST_ROOT, "../src")))
 import imgkit
 
 
-class TestIMGKitInitialization(unittest.TestCase):
+class TestAIMGKitInitialization(unittest.TestCase):
     def test_html_source(self):
         r = imgkit.IMGKit("<h1>Oh hai</h1>", "string")
         self.assertTrue(r.source.isString())
@@ -98,10 +98,14 @@ class TestIMGKitInitialization(unittest.TestCase):
         conf = imgkit.config(meta_tag_prefix="prefix-")
         self.assertEqual("prefix-", conf.meta_tag_prefix)
         with self.assertRaises(IOError):
-            imgkit.config(wkhtmltoimage="wrongpath")
+            config = imgkit.config(wkhtmltoimage="wrongpath")
+            config.get_wkhtmltoimage()
+        with self.assertRaises(IOError):
+            config = imgkit.config(xvfb="wrongpath")
+            config.get_xvfb()
 
 
-class TestIMGKitCommandGeneration(unittest.TestCase):
+class TestBIMGKitCommandGeneration(unittest.TestCase):
     def test_command_construction(self):
         r = imgkit.IMGKit(
             "html", "string", options={"format": "jpg", "toc-l1-font-size": 12}
@@ -295,7 +299,7 @@ class TestIMGKitCommandGeneration(unittest.TestCase):
         self.assertEqual(len(cmd), 6)
 
 
-class TestIMGKitGeneration(unittest.TestCase):
+class TestCIMGKitGeneration(unittest.TestCase):
     def setUp(self):
         pass
 
@@ -428,7 +432,7 @@ class TestIMGKitGeneration(unittest.TestCase):
         )
 
 
-class TestIMGKitAPI(unittest.TestCase):
+class TestDIMGKitAPI(unittest.TestCase):
     def test_from_string(self):
         pic = imgkit.from_string("hello imgkit!", "out.jpg")
         self.assertTrue(pic)
@@ -440,6 +444,14 @@ class TestIMGKitAPI(unittest.TestCase):
     def test_from_file(self):
         pic = imgkit.from_file("fixtures/example.html", "out.jpg")
         self.assertTrue(pic)
+
+
+class TestECommandNotFound(unittest.TestCase):
+    def test_wkhtmltoimage_not_found(self):
+        os.environ["PATH"] = "/bin:/user/bin"
+        with self.assertRaises(IOError):
+            config = imgkit.config()
+            config.get_wkhtmltoimage()
 
 
 if __name__ == "__main__":

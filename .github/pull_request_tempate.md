@@ -1,4 +1,5 @@
 ## Description
+
 <!--
 YOU ARE WELCOME TO CREATE PULL REQUEST!
 
@@ -6,6 +7,7 @@ Please include a summary of the change and which issue is fixed. Please also inc
 -->
 
 ## Type of change
+
 <!--
 Please delete options that are not relevant. For completed items, change [ ] to [x].
 -->
@@ -15,7 +17,7 @@ Please delete options that are not relevant. For completed items, change [ ] to 
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
 - [ ] This change requires a documentation update
 
-## How Has This Been Tested?
+## How Has This Been Tested
 
 <!--
 Please describe the tests that you ran to verify your changes. Provide instructions so we can reproduce. Please also list any relevant details for your test configuration
@@ -23,7 +25,7 @@ Please describe the tests that you ran to verify your changes. Provide instructi
 
 Travis CI link:
 
-## Checklist:
+## Checklist
 
 <!-- Remove items that do not apply. For completed items, change [ ] to [x]. -->
 

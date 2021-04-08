@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"Wkhtmltopdf python wrapper to convert html to image using the webkit rendering engine and qt"
+"""Wkhtmltopdf python wrapper to convert html to image using the webkit rendering engine and qt"""
 
 __author__ = "jarrekk"
 __contact__ = "me@jarrekk.com"
