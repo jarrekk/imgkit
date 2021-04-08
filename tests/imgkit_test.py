@@ -448,8 +448,11 @@ class TestDIMGKitAPI(unittest.TestCase):
 
 class TestECommandNotFound(unittest.TestCase):
     def test_cmd_not_found(self):
-        os.environ["PATH"] = "/bin:/user/bin"
         config = imgkit.config()
+        wkhtmltoimage_path = config.get_wkhtmltoimage()
+        xvfb_path = config.get_xvfb()
+        os.system("sudo mv -f {} /tmp".format(wkhtmltoimage_path))
+        os.system("sudo mv -f {} /tmp".format(xvfb_path))
         with self.assertRaises(OSError):
             config.get_wkhtmltoimage()
 
