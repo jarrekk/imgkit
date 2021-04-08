@@ -29,9 +29,9 @@ class Config:
             # see https://github.com/jarrekk/imgkit/issues/57 for windows condition
             for find_cmd in ("where", "which"):
                 try:
-                    self.wkhtmltoimage = subprocess.run(
-                        [find_cmd, "wkhtmltoimage"], check=True, stdout=subprocess.PIPE
-                    ).stdout.strip()
+                    self.wkhtmltoimage = subprocess.check_output(
+                        [find_cmd, "wkhtmltoimage"], shell=True
+                    ).strip()
                     break
                 except CalledProcessError:
                     self.wkhtmltoimage = "command not found"
@@ -64,9 +64,9 @@ Otherwise please install wkhtmltopdf - http://wkhtmltopdf.org\n
             # see https://github.com/jarrekk/imgkit/issues/57 for windows condition
             for find_cmd in ("where", "which"):
                 try:
-                    self.xvfb = subprocess.run(
-                        [find_cmd, "xvfb-run"], check=True, stdout=subprocess.PIPE
-                    ).stdout.strip()
+                    self.xvfb = subprocess.check_output(
+                        [find_cmd, "xvfb-run"], shell=True
+                    ).strip()
                     break
                 except CalledProcessError:
                     self.xvfb = "command not found"
