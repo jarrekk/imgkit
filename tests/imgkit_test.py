@@ -459,6 +459,19 @@ class TestECommandNotFound(unittest.TestCase):
         with self.assertRaises(OSError):
             config.get_xvfb()
 
+        os.system("sudo mv -f /tmp/wkhtmltoimage {}".format(wkhtmltoimage_path))
+        os.system("sudo mv -f /tmp/xfvb-run {}".format(xvfb_path))
+
+    def test_no_where_which(self):
+        os.environ["PATH"] = "/bin"
+        config = imgkit.config()
+
+        with self.assertRaises(OSError):
+            config.get_wkhtmltoimage()
+
+        with self.assertRaises(OSError):
+            config.get_xvfb()
+
 
 if __name__ == "__main__":
     unittest.main()
