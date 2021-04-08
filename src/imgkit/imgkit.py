@@ -22,7 +22,7 @@ class IMGKit:
         def __init__(self, message):
             """SourceError message"""
 
-            super().__init__()
+            super(Exception, self).__init__()
             self.message = message
 
         def __str__(self):
