@@ -39,3 +39,4 @@ jobs:
 
     - name: Run code coverage
       run: codecov
+
