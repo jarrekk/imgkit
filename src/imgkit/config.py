@@ -2,6 +2,8 @@
 import subprocess
 from subprocess import CalledProcessError
 
+from six import raise_from
+
 
 class Config:
 
@@ -48,7 +50,7 @@ Otherwise please install wkhtmltopdf - http://wkhtmltopdf.org\n
                 with open(self.wkhtmltoimage):
                     pass
             except IOError as io_error:
-                raise IOError(wkhtmltoimage_error) from io_error
+                raise_from(IOError(wkhtmltoimage_error), io_error)
         else:
             raise IOError(wkhtmltoimage_error)
 
@@ -81,7 +83,7 @@ Otherwise please install xvfb.\n
                 with open(self.xvfb):
                     pass
             except IOError as io_error:
-                raise IOError(xvfb_error) from io_error
+                raise_from(IOError(xvfb_error), io_error)
         else:
             raise IOError(xvfb_error)
         return self.xvfb
