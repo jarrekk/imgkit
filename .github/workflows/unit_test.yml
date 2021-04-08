@@ -41,7 +41,7 @@ jobs:
       run: codecov
 
     - name: wemake-python-styleguide
-      uses: wemake-services/wemake-python-styleguide
+      uses: wemake-services/wemake-python-styleguide@latest
       with:
         reporter: 'github-pr-review'
       env:
