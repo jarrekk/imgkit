@@ -450,8 +450,11 @@ class TestECommandNotFound(unittest.TestCase):
     def test_cmd_not_found(self):
         os.environ["PATH"] = "/bin:/user/bin"
         config = imgkit.config()
-        with self.assertRaises(IOError):
+        with self.assertRaises(OSError):
             config.get_wkhtmltoimage()
+
+        with self.assertRaises(OSError):
+            config.get_xvfb()
 
 
 if __name__ == "__main__":
