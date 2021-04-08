@@ -39,10 +39,3 @@ jobs:
 
     - name: Run code coverage
       run: codecov
-
-    - name: wemake-python-styleguide
-      uses: wemake-services/wemake-python-styleguide
-      with:
-        reporter: 'github-pr-review'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
