@@ -473,5 +473,13 @@ class TestECommandNotFound(unittest.TestCase):
             config.get_xvfb()
 
 
+class TestFNoXvfb(unittest.TestCase):
+    def test_no_xvfb(self):
+        os.system("sudo apt uninstall -y xvfb")
+        with self.assertRaises(IOError):
+            r = imgkit.IMGKit("html", "string", options={"xvfb": ""})
+            pic = r.to_img("out.jpg")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -25,11 +25,6 @@ class IMGKit:
             Exception.__init__(self)
             self.message = message
 
-        def __str__(self):
-            """SourceError message string"""
-
-            return self.message
-
     def __init__(self, url_or_file, source_type, options=None, config=None, **kwargs):
         """Deliver parameters into IMGkit"""
 
