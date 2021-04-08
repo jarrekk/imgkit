@@ -319,14 +319,14 @@ class TestCIMGKitGeneration(unittest.TestCase):
 
     def test_raise_error_with_invalid_url(self):
         r = imgkit.IMGKit("wrongurl", "url")
-        with self.assertRaises(IOError):
+        with self.assertRaises(OSError):
             r.to_img("out.jpg")
 
     def test_raise_error_with_invalid_file_path(self):
         paths = ["frongpath.html", "wrongpath2.html"]
-        with self.assertRaises(IOError):
+        with self.assertRaises(OSError):
             imgkit.IMGKit("wrongpath.html", "file")
-        with self.assertRaises(IOError):
+        with self.assertRaises(OSError):
             imgkit.IMGKit(paths, "file")
 
     def test_stylesheet_adding_to_the_head(self):
@@ -402,7 +402,7 @@ class TestCIMGKitGeneration(unittest.TestCase):
 
     def test_wkhtmltoimage_error_handling(self):
         r = imgkit.IMGKit("clearlywrongurl.asdf", "url")
-        with self.assertRaises(IOError):
+        with self.assertRaises(OSError):
             r.to_img()
 
     def test_image_generation_from_file(self):
@@ -414,14 +414,14 @@ class TestCIMGKitGeneration(unittest.TestCase):
     def test_raise_error_with_wrong_css_path(self):
         css = "fixtures/wrongpath.css"
         r = imgkit.IMGKit("fixtures/example.html", "file", css=css)
-        with self.assertRaises(IOError):
+        with self.assertRaises(OSError):
             r.to_img()
 
     def test_raise_error_if_bad_wkhtmltoimage_option(self):
         r = imgkit.IMGKit(
             "<html><body>Hai!</body></html>", "string", options={"bad-option": None}
         )
-        with self.assertRaises(IOError) as cm:
+        with self.assertRaises(OSError) as cm:
             r.to_img()
 
         raised_exception = cm.exception
