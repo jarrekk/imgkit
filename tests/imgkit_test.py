@@ -453,6 +453,12 @@ class TestECommandNotFound(unittest.TestCase):
             config = imgkit.config()
             config.get_wkhtmltoimage()
 
+    def test_xvfb_not_found(self):
+        os.environ["PATH"] = "/bin:/user/bin"
+        with self.assertRaises(IOError):
+            config = imgkit.config()
+            config.get_xvfb()
+
 
 if __name__ == "__main__":
     unittest.main()

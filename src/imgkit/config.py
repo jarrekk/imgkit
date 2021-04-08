@@ -47,8 +47,8 @@ Otherwise please install wkhtmltopdf - http://wkhtmltopdf.org\n
             try:
                 with open(self.wkhtmltoimage):
                     pass
-            except IOError:
-                raise IOError(wkhtmltoimage_error)
+            except IOError as io_error:
+                raise IOError(wkhtmltoimage_error) from io_error
         else:
             raise IOError(wkhtmltoimage_error)
 
@@ -70,9 +70,9 @@ Otherwise please install wkhtmltopdf - http://wkhtmltopdf.org\n
                     self.xvfb = "command not found"
 
         xvfb_error = """
-        No xvfb executable found: "{0}"\nIf this file exists please check that this process can read it.
-        Otherwise please install xvfb.
-                """.format(
+No xvfb executable found: "{0}"\nIf this file exists please check that this process can read it.
+Otherwise please install xvfb.\n
+        """.format(
             self.xvfb
         )
 
@@ -80,8 +80,8 @@ Otherwise please install wkhtmltopdf - http://wkhtmltopdf.org\n
             try:
                 with open(self.xvfb):
                     pass
-            except IOError:
-                raise IOError(xvfb_error)
+            except IOError as io_error:
+                raise IOError(xvfb_error) from io_error
         else:
             raise IOError(xvfb_error)
         return self.xvfb

@@ -22,6 +22,7 @@ class IMGKit:
         def __init__(self, message):
             """SourceError message"""
 
+            super().__init__()
             self.message = message
 
         def __str__(self):
@@ -283,9 +284,9 @@ class IMGKit:
                         "'quiet' option".format(" ".join(args))
                     )
                 return True
-        except IOError as e:
+        except IOError as io_error:
             raise IOError(
                 "Command failed: {0}\n"
                 "Check whhtmltoimage output without "
-                "'quiet' option\n{1} ".format(" ".join(args), e)
-            )
+                "'quiet' option\n{1} ".format(" ".join(args), io_error)
+            ) from io_error
