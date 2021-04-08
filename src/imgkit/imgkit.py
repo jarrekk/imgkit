@@ -5,7 +5,7 @@ import re
 import subprocess
 import sys
 
-from six import string_types
+from six import raise_from, string_types
 
 from .config import Config
 from .source import Source
@@ -22,6 +22,7 @@ class IMGKit:
         def __init__(self, message):
             """SourceError message"""
 
+            super(Exception, self).__init__()
             self.message = message
 
         def __str__(self):
@@ -283,9 +284,12 @@ class IMGKit:
                         "'quiet' option".format(" ".join(args))
                     )
                 return True
-        except IOError as e:
-            raise IOError(
-                "Command failed: {0}\n"
-                "Check whhtmltoimage output without "
-                "'quiet' option\n{1} ".format(" ".join(args), e)
+        except IOError as io_error:
+            raise_from(
+                IOError(
+                    "Command failed: {0}\n"
+                    "Check whhtmltoimage output without "
+                    "'quiet' option\n{1} ".format(" ".join(args), io_error)
+                ),
+                io_error,
             )
