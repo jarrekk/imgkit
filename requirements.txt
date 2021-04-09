@@ -1,4 +1,0 @@
-six
-coverage
-codecov
-nose
