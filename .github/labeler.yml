@@ -5,6 +5,9 @@ pr/GitHub:
 pr/IMGkit:
   - src/*
 pr/documents:
-  - any: ['*.md', 'LICENSE']
+  - '*.md'
+  - 'LICENSE'
 pr/pypi:
-  - any: ['pyproject.toml', 'setup.*']
+  - 'pyproject.toml'
+  - 'setup.cfg'
+  - 'setup.py'
