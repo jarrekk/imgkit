@@ -1,0 +1,8 @@
+test:
+  - tests/*
+GitHub:
+  - .github/*
+IMGkit:
+  - src/*
+documents:
+  - '*.md'
