@@ -308,19 +308,19 @@ class TestCIMGKitGeneration(unittest.TestCase):
             os.remove("out.jpg")
 
     def test_img_generation(self):
-        r = imgkit.IMGKit("html", "string", options={"format": "jpg"})
-        pic = r.to_img("out.jpg")
+        result = imgkit.IMGKit("html", "string", options={"format": "jpg"})
+        pic = result.to_img("out.jpg")
         self.assertTrue(pic)
 
     def test_img_generation_xvfb(self):
-        r = imgkit.IMGKit("html", "string", options={"format": "jpg", "xvfb": ""})
-        pic = r.to_img("out.jpg")
+        result = imgkit.IMGKit("html", "string", options={"format": "jpg", "xvfb": ""})
+        pic = result.to_img("out.jpg")
         self.assertTrue(pic)
 
     def test_raise_error_with_invalid_url(self):
-        r = imgkit.IMGKit("wrongurl", "url")
+        result = imgkit.IMGKit("wrongurl", "url")
         with self.assertRaises(OSError):
-            r.to_img("out.jpg")
+            result.to_img("out.jpg")
 
     def test_raise_error_with_invalid_file_path(self):
         paths = ["frongpath.html", "wrongpath2.html"]
@@ -330,7 +330,7 @@ class TestCIMGKitGeneration(unittest.TestCase):
             imgkit.IMGKit(paths, "file")
 
     def test_stylesheet_adding_to_the_head(self):
-        r = imgkit.IMGKit(
+        result = imgkit.IMGKit(
             "<html><head></head><body>Hai!</body></html>",
             "string",
             css="fixtures/example.css",
@@ -339,11 +339,11 @@ class TestCIMGKitGeneration(unittest.TestCase):
         with open("fixtures/example.css") as f:
             css = f.read()
 
-        r._prepend_css("fixtures/example.css")
-        self.assertIn("<style>{}</style>".format(css), r.source.to_s())
+        result._prepend_css("fixtures/example.css")
+        self.assertIn("<style>{}</style>".format(css), result.source.to_s())
 
     def test_stylesheet_adding_without_head_tag(self):
-        r = imgkit.IMGKit(
+        result = imgkit.IMGKit(
             "<html><body>Hai!</body></html>",
             "string",
             options={"quiet": None},
@@ -353,12 +353,12 @@ class TestCIMGKitGeneration(unittest.TestCase):
         with open("fixtures/example.css") as f:
             css = f.read()
 
-        r._prepend_css("fixtures/example.css")
-        self.assertIn("<style>{}</style><html>".format(css), r.source.to_s())
+        result._prepend_css("fixtures/example.css")
+        self.assertIn("<style>{}</style><html>".format(css), result.source.to_s())
 
     def test_multiple_stylesheets_adding_to_the_head(self):
         css_files = ["fixtures/example.css", "fixtures/example2.css"]
-        r = imgkit.IMGKit(
+        result = imgkit.IMGKit(
             "<html><head></head><body>Hai!</body></html>", "string", css=css_files
         )
 
@@ -367,12 +367,12 @@ class TestCIMGKitGeneration(unittest.TestCase):
             with open(css_file) as f:
                 css.append(f.read())
 
-        r._prepend_css(css_files)
-        self.assertIn("<style>{}</style>".format("\n".join(css)), r.source.to_s())
+        result._prepend_css(css_files)
+        self.assertIn("<style>{}</style>".format("\n".join(css)), result.source.to_s())
 
     def test_multiple_stylesheet_adding_without_head_tag(self):
         css_files = ["fixtures/example.css", "fixtures/example2.css"]
-        r = imgkit.IMGKit(
+        result = imgkit.IMGKit(
             "<html><body>Hai!</body></html>",
             "string",
             options={"quiet": None},
@@ -384,45 +384,47 @@ class TestCIMGKitGeneration(unittest.TestCase):
             with open(css_file) as f:
                 css.append(f.read())
 
-        r._prepend_css(css_files)
-        self.assertIn("<style>{}</style><html>".format("\n".join(css)), r.source.to_s())
+        result._prepend_css(css_files)
+        self.assertIn(
+            "<style>{}</style><html>".format("\n".join(css)), result.source.to_s()
+        )
 
     def test_stylesheet_throw_error_when_url(self):
-        r = imgkit.IMGKit("http://ya.ru", "url", css="fixtures/example.css")
+        result = imgkit.IMGKit("http://ya.ru", "url", css="fixtures/example.css")
 
-        with self.assertRaises(r.SourceError):
-            r.to_img()
+        with self.assertRaises(result.SourceError):
+            result.to_img()
 
     def test_stylesheet_adding_to_file_with_option(self):
         css = "fixtures/example.css"
-        r = imgkit.IMGKit("fixtures/example.html", "file", css=css)
-        self.assertEqual(r.css, css)
-        r._prepend_css(css)
-        self.assertIn("font-size", r.source.to_s())
+        result = imgkit.IMGKit("fixtures/example.html", "file", css=css)
+        self.assertEqual(result.css, css)
+        result._prepend_css(css)
+        self.assertIn("font-size", result.source.to_s())
 
     def test_wkhtmltoimage_error_handling(self):
-        r = imgkit.IMGKit("clearlywrongurl.asdf", "url")
+        result = imgkit.IMGKit("clearlywrongurl.asdf", "url")
         with self.assertRaises(OSError):
-            r.to_img()
+            result.to_img()
 
     def test_image_generation_from_file(self):
         with open("fixtures/example.html", "r") as f:
-            r = imgkit.IMGKit(f, "file")
-            output = r.to_img()
+            result = imgkit.IMGKit(f, "file")
+            output = result.to_img()
         self.assertEqual(output[:4], b"\xff\xd8\xff\xe0")
 
     def test_raise_error_with_wrong_css_path(self):
         css = "fixtures/wrongpath.css"
-        r = imgkit.IMGKit("fixtures/example.html", "file", css=css)
+        result = imgkit.IMGKit("fixtures/example.html", "file", css=css)
         with self.assertRaises(IOError):
-            r.to_img()
+            result.to_img()
 
     def test_raise_error_if_bad_wkhtmltoimage_option(self):
-        r = imgkit.IMGKit(
+        result = imgkit.IMGKit(
             "<html><body>Hai!</body></html>", "string", options={"bad-option": None}
         )
         with self.assertRaises(OSError) as cm:
-            r.to_img()
+            result.to_img()
 
         raised_exception = cm.exception
         self.assertRegexpMatches(
@@ -477,8 +479,8 @@ class TestFNoXvfb(unittest.TestCase):
     def test_no_xvfb(self):
         os.system("sudo apt uninstall -y xvfb")
         with self.assertRaises(OSError):
-            r = imgkit.IMGKit("html", "string", options={"xvfb": ""})
-            pic = r.to_img("out.jpg")
+            result = imgkit.IMGKit("html", "string", options={"xvfb": ""})
+            pic = result.to_img("out.jpg")
 
 
 if __name__ == "__main__":
