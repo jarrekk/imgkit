@@ -6,5 +6,5 @@ pr/IMGkit:
   - src/*
 pr/documents:
   - any: ['*.md', 'LICENSE']
-pr/structure:
+pr/pypi:
   - any: ['pyproject.toml', 'setup.*']
