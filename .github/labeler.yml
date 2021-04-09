@@ -7,4 +7,4 @@ pr/IMGkit:
 pr/documents:
   - any: ['*.md', 'LICENSE']
 pr/structure:
-  - any: ['pyproject.toml', 'setup.cfg', 'setup.py']
+  - any: ['pyproject.toml', 'setup.*']
