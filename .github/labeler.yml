@@ -1,8 +1,13 @@
-test:
+pr/test:
   - tests/*
-GitHub:
+pr/GitHub:
   - .github/*
-IMGkit:
+pr/IMGkit:
   - src/*
-documents:
+pr/documents:
   - '*.md'
+  - 'LICENSE'
+pr/pypi:
+  - 'pyproject.toml'
+  - 'setup.cfg'
+  - 'setup.py'
