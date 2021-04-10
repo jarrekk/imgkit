@@ -2,6 +2,8 @@
 import io
 import os
 
+from six import text_type
+
 
 class Source:
 
@@ -17,12 +19,12 @@ class Source:
     def isUrl(self):
         """URL type"""
 
-        return "url" in self.type
+        return "url" == self.type
 
     def isString(self):
         """String type"""
 
-        return "string" in self.type
+        return "string" == self.type
 
     def isFile(self, path=None):
         # dirty hack to check where file is opened with codecs module
@@ -47,4 +49,7 @@ class Source:
         return hasattr(self.source, "read")
 
     def to_s(self):
-        return self.source
+        if isinstance(self.source, text_type):
+            return self.source
+        else:
+            return text_type(self.source, "utf-8")

@@ -2,6 +2,7 @@
 .idea
 *.pyc
 *.jpg
+*.png
 
 # Build
 .cache
