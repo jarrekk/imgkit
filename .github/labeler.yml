@@ -1,9 +1,10 @@
 pr/test:
   - tests/*
+  - tests/fixtures/*
 pr/GitHub:
   - .github/*
 pr/IMGkit:
-  - src/*
+  - src/imgkit/*
 pr/documents:
   - '*.md'
   - 'LICENSE'
