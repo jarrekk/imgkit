@@ -151,7 +151,7 @@ body = """
     <meta name="imgkit-orientation" content="Landscape"/>
   </head>
   Hello World!
-  </html>
+</html>
 """
 
 imgkit.from_string(body, 'out.png')

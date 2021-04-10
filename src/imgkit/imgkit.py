@@ -71,7 +71,6 @@ class IMGKit:
 
         options = self._gegetate_args(self.options)
         options = [x for x in options]
-        # print 'options', options
         if self.css:
             self._prepend_css(self.css)
 
@@ -231,7 +230,9 @@ class IMGKit:
         # string and prepend css to it and then pass it to stdin.
         # This is a workaround for a bug in wkhtmltoimage (look closely in README)
         if self.source.isString() or (self.source.isFile() and self.css):
-            string = self.source.to_s().encode("utf-8")
+            # HTML charset should be UTF-8 as encoding via utf-8
+            charset_meta = '<meta charset="UTF-8">'
+            string = (charset_meta + self.source.to_s()).encode("utf-8")
         elif self.source.isFileObj():
             string = self.source.source.read().encode("utf-8")
         else:

@@ -9,7 +9,7 @@ def from_url(
     options=None,
     toc=None,
     cover=None,
-    configuration=None,
+    config=None,
     cover_first=None,
 ):
     """
@@ -30,7 +30,7 @@ def from_url(
         options=options,
         toc=toc,
         cover=cover,
-        config=configuration,
+        config=config,
         cover_first=cover_first,
     )
     return rtn.to_img(output_path)
@@ -43,7 +43,7 @@ def from_file(
     toc=None,
     cover=None,
     css=None,
-    configuration=None,
+    config=None,
     cover_first=None,
 ):
     """
@@ -66,7 +66,7 @@ def from_file(
         toc=toc,
         cover=cover,
         css=css,
-        config=configuration,
+        config=config,
         cover_first=cover_first,
     )
     return rtn.to_img(output_path)
@@ -79,7 +79,7 @@ def from_string(
     toc=None,
     cover=None,
     css=None,
-    configuration=None,
+    config=None,
     cover_first=None,
 ):
     """
@@ -102,7 +102,7 @@ def from_string(
         toc=toc,
         cover=cover,
         css=css,
-        config=configuration,
+        config=config,
         cover_first=cover_first,
     )
     return rtn.to_img(output_path)
