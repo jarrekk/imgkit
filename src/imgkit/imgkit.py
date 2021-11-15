@@ -239,7 +239,10 @@ class IMGKit:
             string = None
         stdout, stderr = result.communicate(input=string)
         stderr = stderr or stdout
-        stderr = stderr.decode("utf-8")
+        try: 
+            stderr = stderr.decode("utf-8") 
+        except UnicodeDecodeError: 
+            stderr = ""
         exit_code = result.returncode
 
         if "cannot connect to X server" in stderr:
