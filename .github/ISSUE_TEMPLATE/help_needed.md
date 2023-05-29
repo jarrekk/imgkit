@@ -1,6 +1,6 @@
 ---
 name: Help needed
-about: Create a report to help us improve
+about: Tell me your problem
 title: ''
 labels: help
 assignees: jarrekk
